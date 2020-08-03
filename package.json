@@ -4,8 +4,9 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "SET NODE_ENV=dev && webpack-dev-server --open",
-    "build": "rimraf ./build && SET NODE_ENV=prod && webpack",
+    "start": "webpack-dev-server --open",
+    "build-dev": "rimraf ./dist && webpack --env prod",
+    "build-prod": "rimraf ./dist && webpack --env prod",
     "test": "jest"
   },
   "repository": {
@@ -22,7 +23,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
-    "react-router": "^5.2.0"
+    "react-router": "^5.2.0",
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
@@ -35,7 +37,7 @@
     "html-webpack-plugin": "^4.3.0",
     "jest": "^26.2.2",
     "react-test-renderer": "^16.13.1",
-    "redux": "^4.0.5",
+    "rimraf": "^3.0.2",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
