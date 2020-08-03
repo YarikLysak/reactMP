@@ -2,19 +2,45 @@
   "name": "react-mentoring",
   "version": "0.1.0",
   "private": true,
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "webpack-dev-server --open",
+    "build-dev": "rimraf ./dist && webpack --env prod",
+    "build-prod": "rimraf ./dist && webpack --env prod",
+    "test": "jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YarikLysak/reactMP.git"
+  },
+  "author": "yaroslav_lysak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YarikLysak/reactMP/issues"
+  },
+  "homepage": "https://github.com/YarikLysak/reactMP#readme",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-redux": "^7.2.1",
+    "react-router": "^5.2.0",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-jest": "^26.2.2",
+    "babel-loader": "^8.1.0",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "jest": "^26.2.2",
+    "react-test-renderer": "^16.13.1",
+    "rimraf": "^3.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "eslintConfig": {
     "extends": "react-app"
