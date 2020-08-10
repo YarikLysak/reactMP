@@ -1,3 +1,3 @@
-export { Header } from "./Header";
-export { Footer } from "./Footer";
-export { Search } from "./Search";
+export { default as Header } from "./Header";
+export { default as Footer } from "./Footer";
+export { default as Search } from "./Search";
