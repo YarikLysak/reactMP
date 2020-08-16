@@ -15,7 +15,7 @@ const CardListSort = ({ sortBy }) => {
 
   return (
     <div className={sortByWrapper}>
-      <Typography variant="subtitle1"> Sort by</Typography>
+      <Typography variant="subtitle1">Sort by</Typography>
 
       <FormControl>
         <Select

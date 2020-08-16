@@ -10,13 +10,4 @@ export const headerStyles = makeStyles((theme) => ({
     padding: "1.5em 3em",
     zIndex: 1,
   },
-  addButton: {
-    backgroundColor: theme.lightGray,
-    border: "none",
-    "&:hover": {
-      backgroundColor: theme.lightGray,
-      border: "none",
-      opacity: "0.9",
-    },
-  },
 }));

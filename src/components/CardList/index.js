@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 
 import CardListHead from "./CardListHead";
 import CardItem from "./CardItem";
-import { genres, sortBy, cardsList } from "./mockData";
+import { genres, sortBy, cardsList } from "../../assets/mockData";
 
 const useStyles = makeStyles((theme) => ({
   cardsListWrapper: {

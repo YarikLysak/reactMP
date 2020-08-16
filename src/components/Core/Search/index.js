@@ -21,17 +21,17 @@ const Search = () => {
       <form noValidate autoComplete="off" className={searchForm}>
         <TextField
           id="search"
+          className={searchField}
           placeholder="What do you want to watch?"
           variant="outlined"
-          fullWidth="true"
+          fullWidth
           size="small"
-          className={searchField}
         />
         <Button
-          variant="contained"
-          color="secondary"
-          fullWidth="true"
           className={searchBtn}
+          color="secondary"
+          variant="contained"
+          fullWidth
         >
           Search
         </Button>
