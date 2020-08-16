@@ -1,25 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Fab, Typography, Grid } from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { Typography, Grid } from "@material-ui/core";
 
+import { MoreBtn } from "./MoreBtn";
 import { cardItemStyles } from "./CardItem.style";
 import NoPicture from "../../../assets/images/no-picture.svg";
 
 const CardItem = ({ title, description, year, photo }) => {
-  const {
-    card,
-    moreBg,
-    moreBtn,
-    cardTitle,
-    cardDescription,
-    yearBlock,
-  } = cardItemStyles();
+  const { card, cardTitle, cardDescription, yearBlock } = cardItemStyles();
   return (
     <div className={card}>
-      <Fab size="small" aria-label="more" className={moreBg}>
-        <MoreVertIcon className={moreBtn} />
-      </Fab>
+      <MoreBtn />
       <img src={photo.link} alt={photo.title} />
       <Grid container>
         <Grid item xs={9}>

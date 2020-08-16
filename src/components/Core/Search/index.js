@@ -12,13 +12,17 @@ const Search = () => {
     searchBtn,
   } = useStyles();
 
+  const onSearch = () => {
+    console.log("Search");
+  };
+
   return (
     <div className={searchWrapper}>
       <div className={searchBg}></div>
       <Typography className={searchTitle} variant="h4">
         Find Your Movie
       </Typography>
-      <form noValidate autoComplete="off" className={searchForm}>
+      <form className={searchForm} autoComplete="off" noValidate>
         <TextField
           id="search"
           className={searchField}
@@ -32,6 +36,7 @@ const Search = () => {
           color="secondary"
           variant="contained"
           fullWidth
+          onClick={onSearch}
         >
           Search
         </Button>

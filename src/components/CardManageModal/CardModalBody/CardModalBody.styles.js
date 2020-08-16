@@ -14,6 +14,7 @@ export const cardManageBodyStyles = makeStyles((theme) => ({
   },
   cardModalBodyIcon: {
     alignSelf: "flex-end",
+    cursor: "pointer",
   },
   cardModalBodyForm: {
     display: "flex",
@@ -41,7 +42,8 @@ export const cardManageBodyStyles = makeStyles((theme) => ({
 
     "& input[type='date']": {
       "&::-webkit-calendar-picker-indicator": {
-        color: "transparent",
+        position: "absolute",
+        right: "14px",
         background: "none",
       },
     },

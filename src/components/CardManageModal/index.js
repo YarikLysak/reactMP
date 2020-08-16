@@ -25,7 +25,7 @@ const CardManageModal = () => {
         open={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        <CardModalBody />
+        <CardModalBody setIsOpen={setIsOpen} />
       </Modal>
     </>
   );
