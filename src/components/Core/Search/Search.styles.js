@@ -2,11 +2,8 @@ import { makeStyles } from "@material-ui/core";
 import MoviesBg from "../../../assets/images/movies_bg.jpg";
 
 export const useStyles = makeStyles((theme) => ({
-  searchWrapper: {
+  headingWrapper: {
     position: "relative",
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
     height: "350px",
     width: "100%",
     maxWidth: "1400px",
@@ -33,6 +30,12 @@ export const useStyles = makeStyles((theme) => ({
       opacity: 0.8,
       zIndex: 0,
     },
+  },
+  searchWrapper: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   },
   searchTitle: {
     margin: "1em 0",

@@ -32,10 +32,10 @@ const CardItem = ({ title, description, year, photo }) => {
 export default CardItem;
 
 CardItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
-  photo: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  year: PropTypes.string,
+  photo: PropTypes.object,
 };
 
 CardItem.defaultProps = {

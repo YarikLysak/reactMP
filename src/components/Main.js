@@ -14,7 +14,6 @@ const Main = () => {
     <>
       <ThemeProvider theme={theme}>
         <div className={wrapper}>
-          <Header />
           <Search />
           <ErrorBoundary>
             <CardList />

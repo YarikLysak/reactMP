@@ -1,21 +1,14 @@
 import React, { useState } from "react";
-import { Fab, Typography, Modal, Button } from "@material-ui/core";
+import { Fab } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import CloseIcon from "@material-ui/icons/Close";
 
 import { StyledMenu, StyledMenuItem } from "./StyledMenu";
 import { styles } from "./styles";
+import { CardManageModal, DeleteModal } from "../../../CardManageModals";
 
 export const MoreBtn = () => {
-  const {
-    moreBg,
-    moreBtn,
-    moreCloseBtn,
-    deleteModal,
-    deleteModalBody,
-    deleteModalBodyIcon,
-    deleteConfirmBtn,
-  } = styles();
+  const classes = styles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [IsOpenDelete, setIsOpenDelete] = useState(false);
 
@@ -31,10 +24,10 @@ export const MoreBtn = () => {
       <Fab
         size="small"
         aria-label="more"
-        className={moreBg}
+        className={classes.moreBg}
         onClick={openModal}
       >
-        <MoreVertIcon className={moreBtn} />
+        <MoreVertIcon className={classes.moreBtn} />
       </Fab>
       <StyledMenu
         id="customized-menu"
@@ -46,37 +39,13 @@ export const MoreBtn = () => {
         <CloseIcon
           fontSize="small"
           onClick={closeModal}
-          className={moreCloseBtn}
+          className={classes.moreCloseBtn}
         />
-        <StyledMenuItem onClick={closeModal}>Edit</StyledMenuItem>
+        <CardManageModal closePrevModal={closeModal}>
+          {<StyledMenuItem>Edit</StyledMenuItem>}
+        </CardManageModal>
         <StyledMenuItem onClick={onDeleteItem}>Delete</StyledMenuItem>
-        <Modal
-          className={deleteModal}
-          open={IsOpenDelete}
-          onClose={() => setIsOpenDelete(false)}
-        >
-          <div className={deleteModalBody}>
-            <CloseIcon
-              className={deleteModalBodyIcon}
-              fontSize="large"
-              onClick={() => setIsOpenDelete(false)}
-            />
-            <Typography variant="h4" gutterBottom>
-              Delete Movie
-            </Typography>
-            <Typography variant="subtitle1">
-              Are you want to delete this movie?
-            </Typography>
-            <Button
-              className={deleteConfirmBtn}
-              color="secondary"
-              variant="contained"
-              onClick={() => setIsOpenDelete(false)}
-            >
-              Confirm
-            </Button>
-          </div>
-        </Modal>
+        <DeleteModal IsOpen={IsOpenDelete} setIsOpen={setIsOpenDelete} />
       </StyledMenu>
     </>
   );

@@ -12,6 +12,7 @@ import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
 import { cardManageBodyStyles } from "./CardModalBody.styles";
 import { genres } from "../../../assets/mockData";
 import Logo from "../../Core/Logo";
+import { CardModalFormInput } from "./CardModalFormInput";
 
 const CardModalBody = ({ setIsOpen }) => {
   const classes = cardManageBodyStyles();
@@ -43,45 +44,30 @@ const CardModalBody = ({ setIsOpen }) => {
           autoComplete="off"
           noValidate
         >
-          <div className={classes.formFieldWrapper}>
-            <label for="manage-title">Title</label>
-            <TextField
-              id="manage-title"
-              className={classes.cardModalInput}
-              variant="outlined"
-              placeholder="Title here"
-              fullWidth
-            />
-          </div>
-          <div className={classes.formFieldWrapper}>
-            <label for="manage-release-date">Release Date</label>
-            <TextField
-              id="manage-release-date"
-              className={classes.cardModalInput}
-              variant="outlined"
-              type="date"
-              placeholder="Select Date"
-              fullWidth
-              InputProps={{
-                endAdornment: (
-                  <DateRangeOutlinedIcon className={classes.inputDateIcon} />
-                ),
-              }}
-            />
-          </div>
-          <div className={classes.formFieldWrapper}>
-            <label for="manage-movie-url">Movie URL</label>
-            <TextField
-              id="manage-movie-url"
-              className={classes.cardModalInput}
-              variant="outlined"
-              placeholder="Movie URL here"
-              fullWidth
-            />
-          </div>
+          <CardModalFormInput
+            id="manage-title"
+            title="Title"
+            placeholder="Title here"
+          />
+          <CardModalFormInput
+            id="manage-release-date"
+            title="Release Date"
+            placeholder="Select Date"
+            type="date"
+            InputProps={{
+              endAdornment: (
+                <DateRangeOutlinedIcon className={classes.inputDateIcon} />
+              ),
+            }}
+          />
+          <CardModalFormInput
+            id="manage-movie-url"
+            title="Movie URL"
+            placeholder="Movie URL here"
+          />
           <div className={classes.formFieldWrapper}>
             <FormControl variant="outlined">
-              <label for="manage-genres">Genres</label>
+              <label htmlFor="manage-genres">Genres</label>
               <Select
                 className={classes.cardModalInput}
                 value={genre}
@@ -107,27 +93,16 @@ const CardModalBody = ({ setIsOpen }) => {
               </Select>
             </FormControl>
           </div>
-          <div className={classes.formFieldWrapper}>
-            <label for="manage-overview">Overview</label>
-            <TextField
-              id="manage-overview"
-              className={classes.cardModalInput}
-              variant="outlined"
-              placeholder="Overview here"
-              fullWidth
-            />
-          </div>
-          <div className={classes.formFieldWrapper}>
-            <label for="manage-runtime">Runtime</label>
-            <TextField
-              id="manage-runtime"
-              className={classes.cardModalInput}
-              variant="outlined"
-              placeholder="Runtime here"
-              fullWidth
-            />
-          </div>
-
+          <CardModalFormInput
+            id="manage-overview"
+            title="Overview"
+            placeholder="Overview here"
+          />
+          <CardModalFormInput
+            id="manage-runtime"
+            title="Runtime"
+            placeholder="Runtime here"
+          />
           <div className={classes.cardModalBtnBlock}>
             <Button
               variant="outlined"
