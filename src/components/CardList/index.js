@@ -22,7 +22,7 @@ const ClassList = () => {
   return (
     <div className={cardsListWrapper}>
       <CardListHead count={cardsList.length} genres={genres} sortBy={sortBy} />
-      <Grid container spacing={9}>
+      <Grid container spacing={5}>
         {cardsList.map((card) => (
           <Grid item xs={4} key={card.id}>
             <CardItem {...card} />

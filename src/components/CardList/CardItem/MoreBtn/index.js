@@ -7,7 +7,7 @@ import { StyledMenu, StyledMenuItem } from "./StyledMenu";
 import { styles } from "./styles";
 import { CardManageModal, DeleteModal } from "../../../CardManageModals";
 
-export const MoreBtn = () => {
+export const MoreBtn = ({ moreBgHoverClass }) => {
   const classes = styles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [IsOpenDelete, setIsOpenDelete] = useState(false);
@@ -24,7 +24,7 @@ export const MoreBtn = () => {
       <Fab
         size="small"
         aria-label="more"
-        className={classes.moreBg}
+        className={[classes.moreBg, moreBgHoverClass]}
         onClick={openModal}
       >
         <MoreVertIcon className={classes.moreBtn} />

@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core";
-import MoviesBg from "../../../assets/images/movies_bg.jpg";
+import { MoviesBg } from "../../../assets/images";
 
 export const useStyles = makeStyles((theme) => ({
   headingWrapper: {
