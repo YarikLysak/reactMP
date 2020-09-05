@@ -24,7 +24,7 @@ export const MoreBtn = ({ moreBgHoverClass }) => {
       <Fab
         size="small"
         aria-label="more"
-        className={[classes.moreBg, moreBgHoverClass]}
+        className={`${classes.moreBg} ${moreBgHoverClass}`}
         onClick={openModal}
       >
         <MoreVertIcon className={classes.moreBtn} />

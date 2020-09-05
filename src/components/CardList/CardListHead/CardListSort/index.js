@@ -6,7 +6,6 @@ import { cardListSortStyles } from "./CardListSort.styles";
 let sortBySelected = "1";
 
 const handleChange = (el) => {
-  console.log("el", el.target);
   sortBySelected = el.target.value;
 };
 

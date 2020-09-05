@@ -2,9 +2,9 @@ import { createMuiTheme, makeStyles } from "@material-ui/core";
 
 export const theme = createMuiTheme({
   pink: "#f65261",
-  gray: "#424242",
+  gray: "#555555",
   darkGray: "#232323",
-  lightGray: "#555555",
+  lightGray: "#939393",
   white: "#ffffff",
 
   button: {
@@ -18,5 +18,6 @@ export const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "center",
     backgroundColor: theme.lightGray,
+    flex: "1 0 auto",
   },
 });

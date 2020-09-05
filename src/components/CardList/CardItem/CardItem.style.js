@@ -9,20 +9,31 @@ export const cardItemStyles = ({ link }) =>
       flexDirection: "column",
       justifyContent: "space-between",
       padding: theme.spacing(2, 2, 0),
+      cursor: "pointer",
 
       "&:hover $moreBgHover": {
         visibility: "visible",
       },
     },
-    imageClass: {
+    cardImage: {
       height: "100%",
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
       backgroundImage: `url(${link})`,
       marginBottom: theme.spacing(2),
     },
-    cardTitle: { color: theme.white, marginBottom: theme.spacing(1) },
-    cardDescription: { color: theme.lightGray, fontWeight: "bold" },
+    cardTitle: {
+      color: theme.lightGray,
+      margin: 0,
+      textTransform: "capitalize",
+    },
+    cardSubTitle: {
+      color: theme.lightGray,
+      fontWeight: "bolder",
+      fontSize: "0.9em",
+      margin: "0",
+      marginTop: "0.5em",
+    },
     yearBlock: {
       display: "flex",
       justifyContent: "center",
@@ -31,6 +42,7 @@ export const cardItemStyles = ({ link }) =>
       boxShadow: `0 0 3px 0 ${theme.lightGray}`,
       borderRadius: "4px",
       color: theme.lightGray,
+      padding: "3px 0",
       fontWeight: "bold",
     },
     moreBgHover: {

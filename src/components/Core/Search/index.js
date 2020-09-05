@@ -1,12 +1,10 @@
 import React from "react";
-import { TextField, Button, Typography } from "@material-ui/core";
-import { useStyles } from "./Search.styles";
-import Header from "../Header";
+
+import { TextField, Button } from "@material-ui/core";
+import { useStyles } from "./styles";
 
 const Search = () => {
   const {
-    headingWrapper,
-    searchBg,
     searchWrapper,
     searchTitle,
     searchForm,
@@ -19,33 +17,27 @@ const Search = () => {
   };
 
   return (
-    <div className={headingWrapper}>
-      <div className={searchBg}></div>
-      <Header />
-      <div className={searchWrapper}>
-        <Typography className={searchTitle} variant="h4">
-          Find Your Movie
-        </Typography>
-        <form className={searchForm} autoComplete="off" noValidate>
-          <TextField
-            id="search"
-            className={searchField}
-            placeholder="What do you want to watch?"
-            variant="outlined"
-            fullWidth
-            size="small"
-          />
-          <Button
-            className={searchBtn}
-            color="secondary"
-            variant="contained"
-            fullWidth
-            onClick={onSearch}
-          >
-            Search
-          </Button>
-        </form>
-      </div>
+    <div className={searchWrapper}>
+      <h1 className={searchTitle}>Find Your Movie</h1>
+      <form className={searchForm} autoComplete="off" noValidate>
+        <TextField
+          id="search"
+          className={searchField}
+          placeholder="What do you want to watch?"
+          variant="outlined"
+          fullWidth
+          size="small"
+        />
+        <Button
+          className={searchBtn}
+          color="secondary"
+          variant="contained"
+          fullWidth
+          onClick={onSearch}
+        >
+          Search
+        </Button>
+      </form>
     </div>
   );
 };
