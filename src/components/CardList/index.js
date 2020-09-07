@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/styles";
 
 import CardListHead from "./CardListHead";
 import CardItem from "./CardItem";
-import { genres, sortBy, cardsList } from "../../assets/mockData";
 
 const useStyles = makeStyles((theme) => ({
   cardsListWrapper: {
@@ -16,16 +15,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ClassList = () => {
+const ClassList = ({ cardsList, genres, sortBy, setViewState }) => {
   const { cardsListWrapper } = useStyles();
 
   return (
     <div className={cardsListWrapper}>
       <CardListHead count={cardsList.length} genres={genres} sortBy={sortBy} />
-      <Grid container spacing={9}>
+      <Grid container spacing={5}>
         {cardsList.map((card) => (
           <Grid item xs={4} key={card.id}>
-            <CardItem {...card} />
+            <CardItem {...card} setViewState={setViewState} />
           </Grid>
         ))}
       </Grid>

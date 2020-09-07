@@ -1,9 +1,79 @@
+import {
+  PulpFiction,
+  BohemianRhapsody,
+  KillBill2,
+  InfinityWar,
+  Inception,
+  ReservoirDogs,
+} from "./images";
+
 export const cardsList = [
-  { id: "1", title: "Name-a", description: "description-1", year: "2003" },
-  { id: "2", title: "Name-b", description: "description-2", year: "2004" },
-  { id: "3", title: "Name-c", description: "description-3", year: "1994" },
-  { id: "4", title: "Name-d", description: "description-4", year: "2004" },
-  { id: "5", title: "Name-e", description: "description-5", year: "2006" },
+  {
+    id: "1",
+    title: "Pulp fiction",
+    subTitle: "Action & Adventure",
+    description:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+    time: "178",
+    rate: 8.9,
+    year: "1994",
+    photo: { link: PulpFiction, title: "Pulp fiction" },
+  },
+  {
+    id: "2",
+    title: "Bohemian rhapsody",
+    subTitle: "Drama, Biography, Music",
+    description:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+    time: "133",
+    rate: 8,
+    year: "2018",
+    photo: { link: BohemianRhapsody, title: "Bohemian rhapsody" },
+  },
+  {
+    id: "3",
+    title: "Kill Bill: Vol 2",
+    subTitle: "Oscar Winning Movie",
+    description:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+    time: "138",
+    rate: 8,
+    year: "2004",
+    photo: { link: KillBill2, title: "Kill Bill: Vol 2" },
+  },
+  {
+    id: "4",
+    title: "Avengers: InfinityWar",
+    subTitle: "Action & Adventure",
+    description:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+    time: "160",
+    rate: 8.4,
+    year: "2018",
+    photo: { link: InfinityWar, title: "Avengers: InfinityWar" },
+  },
+  {
+    id: "5",
+    title: "Inception",
+    subTitle: "Action & Adventure",
+    description:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+    time: "162",
+    rate: 8.8,
+    year: "2010",
+    photo: { link: Inception, title: "Inception" },
+  },
+  {
+    id: "6",
+    title: "Reservoir dogs",
+    subTitle: "Oscar Winning Movie",
+    description:
+      "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+    time: "100",
+    rate: 8.3,
+    year: "1992",
+    photo: { link: ReservoirDogs, title: "Reservoir dogs" },
+  },
 ];
 
 export const genres = [

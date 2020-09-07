@@ -12,12 +12,15 @@ export const headerStyles = makeStyles((theme) => ({
     zIndex: 1,
   },
   addButton: {
-    backgroundColor: theme.lightGray,
+    boxShadow: `inset 0px 0px 30px 5px ${theme.gray}`,
     border: "none",
     "&:hover": {
-      backgroundColor: theme.lightGray,
+      boxShadow: `inset 0px 0px 5px 0px ${theme.lightGray}`,
       border: "none",
-      opacity: "0.9",
     },
+  },
+  searchButton: {
+    cursor: "pointer",
+    transform: "rotateY(180deg)",
   },
 }));

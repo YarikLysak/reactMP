@@ -7,11 +7,12 @@ export const StyledMenu = withStyles((theme) => ({
     width: "15%",
     backgroundColor: theme.darkGray,
     color: theme.white,
-    padding: theme.spacing(1, 0),
   },
   list: {
     display: "flex",
     flexDirection: "column",
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
   },
 }))((props) => (
   <Menu

@@ -1,30 +1,51 @@
 import { makeStyles } from "@material-ui/core";
 
-export const cardItemStyles = makeStyles((theme) => ({
-  card: {
-    position: "relative",
-    padding: theme.spacing(2, 2, 0),
+export const cardItemStyles = ({ link }) =>
+  makeStyles((theme) => ({
+    card: {
+      position: "relative",
+      height: "35em",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      padding: theme.spacing(2, 2, 0),
+      cursor: "pointer",
 
-    "&:hover $moreBg": {
-      backgroundColor: "red",
+      "&:hover $moreBgHover": {
+        visibility: "visible",
+      },
     },
-  },
-  moreBg: {
-    position: "absolute",
-    right: 0,
-    margin: theme.spacing(1.5),
-    backgroundColor: "232323",
-  },
-  cardTitle: { color: theme.white },
-  cardDescription: { color: theme.lightGray, fontWeight: "bold" },
-  yearBlock: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    border: `1px solid ${theme.lightGray}`,
-    boxShadow: `0 0 3px 0 ${theme.lightGray}`,
-    borderRadius: "4px",
-    color: theme.lightGray,
-    fontWeight: "bold",
-  },
-}));
+    cardImage: {
+      height: "100%",
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+      backgroundImage: `url(${link})`,
+      marginBottom: theme.spacing(2),
+    },
+    cardTitle: {
+      color: theme.lightGray,
+      margin: 0,
+      textTransform: "capitalize",
+    },
+    cardSubTitle: {
+      color: theme.lightGray,
+      fontWeight: "bolder",
+      fontSize: "0.9em",
+      margin: "0",
+      marginTop: "0.5em",
+    },
+    yearBlock: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      border: `1px solid ${theme.lightGray}`,
+      boxShadow: `0 0 3px 0 ${theme.lightGray}`,
+      borderRadius: "4px",
+      color: theme.lightGray,
+      padding: "3px 0",
+      fontWeight: "bold",
+    },
+    moreBgHover: {
+      visibility: "hidden",
+    },
+  }))();

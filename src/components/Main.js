@@ -1,25 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "@material-ui/core";
-import { Header, Search, Footer } from "./Core";
+
+import { HeaderContainer, Footer } from "./Core";
 import CardList from "./CardList";
 import ErrorBoundary from "./ErrorBoundary";
+import customHook from "./customHook";
 
+import { genres, sortBy, cardsList } from "../assets/mockData";
 import { theme, useStyles } from "./Main.styles";
 import "../assets/styles/main.css";
+import "../assets/styles/fonts.css";
 
 const Main = () => {
   const { wrapper } = useStyles();
+  const [state, dispatch] = customHook();
+  const [movieList, setMovieList] = useState([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setMovieList(cardsList), 1000);
+    return () => setTimeout(timer);
+  });
+
   return (
     <>
       <ThemeProvider theme={theme}>
         <div className={wrapper}>
-          <Search />
+          <HeaderContainer
+            card={movieList.find(({ id }) => id === state.selectedItemId)}
+            isSearch={state.isSearch}
+            setViewState={dispatch}
+          />
           <ErrorBoundary>
-            <CardList />
+            <CardList
+              setViewState={dispatch}
+              genres={genres}
+              sortBy={sortBy}
+              cardsList={movieList}
+            />
           </ErrorBoundary>
-          <Footer />
         </div>
+        <Footer />
       </ThemeProvider>
     </>
   );
