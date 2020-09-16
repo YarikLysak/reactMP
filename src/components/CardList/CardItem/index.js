@@ -6,7 +6,9 @@ import { MoreBtn } from "./MoreBtn";
 import { cardItemStyles } from "./CardItem.style";
 import { NoPicture } from "../../../assets/images";
 
-const CardItem = ({ id, title, subTitle, year, photo, setViewState }) => {
+const CardItem = ({ movie, selectMovie }) => {
+  const { title, subTitle, year, photo } = movie;
+
   const {
     card,
     cardImage,
@@ -16,10 +18,7 @@ const CardItem = ({ id, title, subTitle, year, photo, setViewState }) => {
     moreBgHover,
   } = cardItemStyles({ link: photo.link });
 
-  const handleClick = useCallback(
-    () => setViewState({ type: "movieView", payload: id }),
-    [id]
-  );
+  const handleClick = useCallback(() => selectMovie(movie), [movie]);
 
   return (
     <div className={card} onClick={handleClick}>
@@ -43,22 +42,19 @@ const CardItem = ({ id, title, subTitle, year, photo, setViewState }) => {
 export default CardItem;
 
 CardItem.propTypes = {
-  title: PropTypes.string,
-  subTitle: PropTypes.string,
-  description: PropTypes.string,
-  time: PropTypes.string,
-  rate: PropTypes.number,
-  year: PropTypes.string,
-  photo: PropTypes.object,
-  setViewState: PropTypes.func,
+  movie: PropTypes.object,
+  selectMovie: PropTypes.func,
 };
 
 CardItem.defaultProps = {
-  title: "Title not setted",
-  subTitle: "Sub title not setted",
-  description: "Desc not setted",
-  time: "Length is undefined",
-  rate: "Rate is undefined",
-  year: "Year not setted",
-  photo: { link: NoPicture, title: "No picture found" },
+  movie: {
+    id: "",
+    title: "Title not setted",
+    subTitle: "Sub title not setted",
+    description: "Desc not setted",
+    time: "Length is undefined",
+    rate: "Rate is undefined",
+    year: "Year not setted",
+    photo: { link: NoPicture, title: "No picture found" },
+  },
 };

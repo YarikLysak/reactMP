@@ -6,7 +6,7 @@ import CardListGenre from "./CardListGenre";
 import CardListSort from "./CardListSort";
 import { cardListStyles } from "./CardList.styles";
 
-const CardListHead = ({ count, genres, sortBy }) => {
+const CardListHead = ({ count, genres, sortBy, selectSortedBy }) => {
   const {
     filterWrapper,
     filterBlock,
@@ -24,7 +24,7 @@ const CardListHead = ({ count, genres, sortBy }) => {
             ))}
           </Grid>
           <Grid item xs={6}>
-            <CardListSort sortBy={sortBy} />
+            <CardListSort sortBy={sortBy} selectSortedBy={selectSortedBy} />
           </Grid>
         </Grid>
       </Grid>
@@ -43,4 +43,5 @@ CardListHead.propTypes = {
   count: PropTypes.number.isRequired,
   genres: PropTypes.array.isRequired,
   sortBy: PropTypes.array.isRequired,
+  selectSortedBy: PropTypes.func.isRequired,
 };

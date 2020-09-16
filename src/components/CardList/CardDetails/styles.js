@@ -26,7 +26,11 @@ export const cardDetailsStyles = ({ link, rateColor }) =>
       fontSize: "3em",
     },
     cardRate: {
-      padding: "15px",
+      height: "3em",
+      width: "3em",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
       border: `2px solid ${theme.lightGray}`,
       borderRadius: "50%",
       color: rateColor,
