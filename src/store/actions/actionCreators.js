@@ -57,3 +57,18 @@ export const deleteMovie = (deletedMovie) => async (dispatch) => {
     payload: deletedMovie,
   });
 };
+
+export const sortMovies = (sortBy) => ({
+  type: actionTypes.SORT_MOVIES,
+  payload: sortBy,
+});
+
+export const filterMovies = (filterBy) => ({
+  type: actionTypes.FILTER_MOVIES,
+  payload: filterBy,
+});
+
+export const seFilterBy = (filterBy) => ({
+  type: actionTypes.SET_FILTER_BY,
+  payload: filterBy,
+});

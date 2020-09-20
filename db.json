@@ -1,23 +1,18 @@
 {
-  "sortBy": [
-    {
+  "sortBy": [{
       "code": "1",
-      "title": "year",
-      "selected": true
+      "title": "year"
     },
     {
       "code": "2",
-      "title": "title",
-      "selected": false
+      "title": "title"
     },
     {
       "code": "3",
-      "title": "rate",
-      "selected": false
+      "title": "rate"
     }
   ],
-  "genres": [
-    {
+  "genres": [{
       "code": "0",
       "title": "Action"
     },
@@ -42,8 +37,7 @@
       "title": "Drama"
     }
   ],
-  "movieList": [
-    {
+  "movieList": [{
       "id": "1",
       "title": "Pulp fiction",
       "genres": [

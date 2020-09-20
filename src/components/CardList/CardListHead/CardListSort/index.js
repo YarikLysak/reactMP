@@ -6,13 +6,13 @@ import { selectSortedBy } from "../../../../store/actions/actionCreators";
 
 const CardListSort = () => {
   const { sortByWrapper, sortBySelect, icon } = cardListSortStyles();
-  const { sortBy } = useSelector((state) => state);
+  const { list, selected } = useSelector((state) => state.sortBy);
   const dispatch = useDispatch();
 
   const handleChange = useCallback(
     ({ target: { value } }) =>
-      dispatch(selectSortedBy(sortBy.find(({ code }) => code === value))),
-    [sortBy]
+      dispatch(selectSortedBy(list.find(({ code }) => code === value))),
+    [list]
   );
 
   return (
@@ -20,10 +20,10 @@ const CardListSort = () => {
       <Typography variant="subtitle1">Sort by</Typography>
 
       <FormControl>
-        {sortBy.length ? (
+        {list.length ? (
           <Select
             className={sortBySelect}
-            value={sortBy.find((el) => el.selected).code}
+            value={selected.code}
             onChange={handleChange}
             inputProps={{
               classes: {
@@ -31,7 +31,7 @@ const CardListSort = () => {
               },
             }}
           >
-            {sortBy.map((item) => (
+            {list.map((item) => (
               <MenuItem key={item.code} value={item.code}>
                 {item.title}
               </MenuItem>

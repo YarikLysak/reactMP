@@ -1,52 +1,30 @@
 import actionTypes from "../actions/actionTypes";
 import { combineReducers } from "redux";
+import moviesReducer from "./movies.reducer";
 
-const moviesInitState = {
-  movieList: [],
-  selectedMovie: null,
-  movieView: false,
-};
+const initGenres = { list: [], selected: null };
+const sortByState = { list: [], selected: null };
 
-const moviesReducer = (state = moviesInitState, { type, payload }) => {
+const genresReducer = (state = initGenres, { type, payload }) => {
   switch (type) {
-    case actionTypes.FETCH_MOVIES:
-      return { ...state, movieList: [...payload] };
-    case actionTypes.SELECT_MOVIE:
-      return { ...state, selectedMovie: { ...payload }, movieView: true };
-    case actionTypes.SELECT_SEARCH:
-      return { ...state, selectedMovie: null, movieView: false };
-    case actionTypes.EDIT_MOVIE:
-      return {
-        ...state,
-        movieList: [...state.movieList].map((movie) => {
-          return (movie = movie.id === payload.id ? payload : movie);
-        }),
-      };
-    case actionTypes.ADD_MOVIE:
-      return { ...state, movieList: [...state.movieList, payload] };
-    case actionTypes.DELETE_MOVIE:
-      return {
-        ...state,
-        movieList: state.movieList.filter(({ id }) => id !== payload.id),
-      };
+    case actionTypes.FETCH_GENRES:
+      return { ...state, list: [...payload] };
+    case actionTypes.SET_FILTER_BY:
+      return { ...state, selected: payload };
     default:
       return state;
   }
 };
 
-const genresReducer = (genres = [], { type, payload }) => {
-  return type === actionTypes.FETCH_GENRES ? [...payload] : genres;
-};
-
-const sortByReducer = (sortBy = [], { type, payload }) => {
+const sortByReducer = (sortBy = sortByState, { type, payload }) => {
   switch (type) {
     case actionTypes.FETCH_SORT_BY_LIST:
-      return [...payload];
+      return { ...sortBy, list: [...payload], selected: [...payload][0] };
     case actionTypes.SELECT_SORTED_BY:
-      return sortBy.map((el) => ({
-        ...el,
-        selected: el.code == payload.code,
-      }));
+      return {
+        ...sortBy,
+        selected: [...sortBy.list].find((el) => el.code == payload.code),
+      };
     default:
       return sortBy;
   }

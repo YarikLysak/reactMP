@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { selectSearch } from "../../../store/actions/actionCreators";
 import Header from "../Header";
@@ -7,20 +7,26 @@ import Search from "../Search";
 import CardDetails from "../../CardList/CardDetails";
 import { useStyles } from "./styles";
 
-const HeaderContainer = ({ selectedMovie, movieView, selectSearch }) => {
+const HeaderContainer = () => {
   const { headingWrapper, headingBg } = useStyles();
+  const dispatch = useDispatch();
+  const onSelectSearch = () => dispatch(selectSearch());
+  const {
+    movies: { selectedMovie, movieView },
+    genres,
+  } = useSelector((state) => state);
 
   return (
     <div className={headingWrapper}>
       <div className={headingBg}></div>
-      <Header movieView={movieView} selectSearch={selectSearch} />
-      {!movieView ? <Search /> : <CardDetails {...selectedMovie} />}
+      <Header movieView={movieView} selectSearch={onSelectSearch} />
+      {!movieView ? (
+        <Search />
+      ) : (
+        <CardDetails {...selectedMovie} genreList={genres.list} />
+      )}
     </div>
   );
 };
 
-const mapStateToProps = ({ movies: { selectedMovie, movieView } }) => {
-  return { selectedMovie, movieView };
-};
-
-export default connect(mapStateToProps, { selectSearch })(HeaderContainer);
+export default HeaderContainer;

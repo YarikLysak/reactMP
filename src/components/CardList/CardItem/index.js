@@ -5,7 +5,6 @@ import { Grid } from "@material-ui/core";
 
 import { MoreBtn } from "./MoreBtn";
 import { cardItemStyles } from "./CardItem.style";
-import { NoPicture } from "../../../assets/images";
 import { selectMovie } from "../../../store/actions/actionCreators";
 
 const CardItem = ({ movie }) => {
@@ -21,7 +20,7 @@ const CardItem = ({ movie }) => {
     moreBgHover,
   } = cardItemStyles({ link: photo.link });
   const dispatch = useDispatch();
-  const genreList = useSelector(({ genres }) => genres);
+  const genreList = useSelector(({ genres }) => genres.list);
 
   const handleClick = useCallback(() => dispatch(selectMovie(movie), [movie]));
 

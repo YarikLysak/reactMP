@@ -9,6 +9,9 @@ const actionTypes = {
   EDIT_MOVIE: "EDIT_MOVIE",
   ADD_MOVIE: "ADD_MOVIE",
   DELETE_MOVIE: "DELETE_MOVIE",
+  SORT_MOVIES: "SORT_MOVIES",
+  FILTER_MOVIES: "FILTER_MOVIES",
+  SET_FILTER_BY: "SET_FILTER_BY",
 };
 
 export default actionTypes;

@@ -21,9 +21,8 @@ import { addMovie, updateMovie } from "../../../store/actions/actionCreators";
 const CardModalBody = ({ setIsOpen, editedMovie }) => {
   const classes = cardManageBodyStyles();
   const dispatch = useDispatch();
-  const firstChange = false;
 
-  const { genres } = useSelector((state) => state);
+  const genres = useSelector((state) => state.genres.list);
   const [title, setTitle] = useState("");
   const [year, setYear] = useState("");
   const [selectedGenres, setSelectedGenres] = useState([]);

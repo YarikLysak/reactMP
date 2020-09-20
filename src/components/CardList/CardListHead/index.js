@@ -1,10 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { Grid, Typography } from "@material-ui/core";
+import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab";
 
-import CardListGenre from "./CardListGenre";
 import CardListSort from "./CardListSort";
 import { cardListStyles } from "./CardList.styles";
+import {
+  filterMovies,
+  seFilterBy,
+} from "../../../store/actions/actionCreators";
 
 const CardListHead = ({ count, genres }) => {
   const {
@@ -13,15 +18,29 @@ const CardListHead = ({ count, genres }) => {
     filterGenres,
     filterInfo,
   } = cardListStyles();
+  const dispatch = useDispatch();
+
+  const handleClick = (e, filterBy) => {
+    dispatch(seFilterBy(filterBy));
+    dispatch(filterMovies(filterBy));
+  };
 
   return (
     <Grid container>
       <Grid item xs={12} className={filterWrapper}>
         <Grid container className={filterBlock}>
           <Grid item xs={9} className={filterGenres}>
-            {genres.map((genre) => (
-              <CardListGenre key={genre.code} genre={genre} />
-            ))}
+            <ToggleButtonGroup
+              value={genres.selected}
+              exclusive
+              onChange={handleClick}
+            >
+              {genres.list.map((genre) => (
+                <ToggleButton key={genre.code} value={genre.code}>
+                  {genre.title}
+                </ToggleButton>
+              ))}
+            </ToggleButtonGroup>
           </Grid>
           <Grid item xs={3}>
             <CardListSort />
@@ -41,5 +60,5 @@ export default CardListHead;
 
 CardListHead.propTypes = {
   count: PropTypes.number.isRequired,
-  genres: PropTypes.array.isRequired,
+  genres: PropTypes.object.isRequired,
 };

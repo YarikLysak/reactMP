@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
 
 import { cardDetailsStyles } from "./styles";
-import { NoPicture } from "../../../assets/images";
 
 const CardDetails = (props) => {
   const setRateColor = (rate) => {
@@ -32,9 +31,14 @@ const CardDetails = (props) => {
             <div className={cardStyles.cardRate}>{props.rate}</div>
           </Grid>
         </Grid>
-        <p className={cardStyles.cardSubTitle}>{props.genres.join(", ")}</p>
+        <p className={cardStyles.cardSubTitle}>
+          {props.genreList
+            .filter(({ code }) => props.genres.includes(code))
+            .map(({ title }) => title)
+            .join(", ")}
+        </p>
         <div style={{ display: "flex" }}>
-          <div className={cardStyles.cardPink}>{props.year}</div>
+          <div className={cardStyles.cardPink}>{props.year.split("-")[0]}</div>
           <div className={cardStyles.cardPink}>{props.runTime} min</div>
         </div>
         <p className={cardStyles.cardDescription}>{props.description}</p>
@@ -45,6 +49,7 @@ const CardDetails = (props) => {
 export default CardDetails;
 
 CardDetails.propTypes = {
+  genreList: PropTypes.array.isRequired,
   id: PropTypes.string,
   title: PropTypes.string,
   genres: PropTypes.array,
@@ -53,14 +58,4 @@ CardDetails.propTypes = {
   rate: PropTypes.number,
   year: PropTypes.string,
   photo: PropTypes.object,
-};
-
-CardDetails.defaultProps = {
-  title: "Title not set",
-  genres: ["Genres not set"],
-  description: "Desc not set",
-  runTime: "Length is undefined",
-  rate: "Rate is undefined",
-  year: "Year not set",
-  photo: { link: NoPicture, title: "No picture found" },
 };
