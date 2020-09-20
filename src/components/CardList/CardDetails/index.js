@@ -32,10 +32,10 @@ const CardDetails = (props) => {
             <div className={cardStyles.cardRate}>{props.rate}</div>
           </Grid>
         </Grid>
-        <p className={cardStyles.cardSubTitle}>{props.subTitle}</p>
+        <p className={cardStyles.cardSubTitle}>{props.genres.join(", ")}</p>
         <div style={{ display: "flex" }}>
           <div className={cardStyles.cardPink}>{props.year}</div>
-          <div className={cardStyles.cardPink}>{props.time} min</div>
+          <div className={cardStyles.cardPink}>{props.runTime} min</div>
         </div>
         <p className={cardStyles.cardDescription}>{props.description}</p>
       </Grid>
@@ -47,20 +47,20 @@ export default CardDetails;
 CardDetails.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
-  subTitle: PropTypes.string,
+  genres: PropTypes.array,
   description: PropTypes.string,
-  time: PropTypes.string,
+  runTime: PropTypes.string,
   rate: PropTypes.number,
   year: PropTypes.string,
   photo: PropTypes.object,
 };
 
 CardDetails.defaultProps = {
-  title: "Title not setted",
-  subTitle: "Sub title not setted",
-  description: "Desc not setted",
-  time: "Length is undefined",
+  title: "Title not set",
+  genres: ["Genres not set"],
+  description: "Desc not set",
+  runTime: "Length is undefined",
   rate: "Rate is undefined",
-  year: "Year not setted",
+  year: "Year not set",
   photo: { link: NoPicture, title: "No picture found" },
 };

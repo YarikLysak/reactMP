@@ -15,6 +15,20 @@ const moviesReducer = (state = moviesInitState, { type, payload }) => {
       return { ...state, selectedMovie: { ...payload }, movieView: true };
     case actionTypes.SELECT_SEARCH:
       return { ...state, selectedMovie: null, movieView: false };
+    case actionTypes.EDIT_MOVIE:
+      return {
+        ...state,
+        movieList: [...state.movieList].map((movie) => {
+          return (movie = movie.id === payload.id ? payload : movie);
+        }),
+      };
+    case actionTypes.ADD_MOVIE:
+      return { ...state, movieList: [...state.movieList, payload] };
+    case actionTypes.DELETE_MOVIE:
+      return {
+        ...state,
+        movieList: state.movieList.filter(({ id }) => id !== payload.id),
+      };
     default:
       return state;
   }
@@ -25,7 +39,6 @@ const genresReducer = (genres = [], { type, payload }) => {
 };
 
 const sortByReducer = (sortBy = [], { type, payload }) => {
-  console.log("payload", type, payload);
   switch (type) {
     case actionTypes.FETCH_SORT_BY_LIST:
       return [...payload];

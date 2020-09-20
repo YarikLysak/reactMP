@@ -7,16 +7,21 @@ import { StyledMenu, StyledMenuItem } from "./StyledMenu";
 import { styles } from "./styles";
 import { CardManageModal, DeleteModal } from "../../../CardManageModals";
 
-export const MoreBtn = ({ moreBgHoverClass }) => {
+export const MoreBtn = ({ moreBgHoverClass, movie }) => {
   const classes = styles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [IsOpenDelete, setIsOpenDelete] = useState(false);
+  const [isOpenDelete, setIsOpenDelete] = useState(false);
+  const [editedMovie, setEditedMovie] = useState(false);
 
-  const openModal = (e) => setAnchorEl(e.currentTarget);
   const closeModal = () => setAnchorEl(null);
+
   const onDeleteItem = () => {
     setIsOpenDelete(true);
     closeModal();
+  };
+  const handleClick = (e) => {
+    setEditedMovie(movie);
+    setAnchorEl(e.currentTarget);
   };
 
   return (
@@ -25,7 +30,7 @@ export const MoreBtn = ({ moreBgHoverClass }) => {
         size="small"
         aria-label="more"
         className={`${classes.moreBg} ${moreBgHoverClass}`}
-        onClick={openModal}
+        onClick={handleClick}
       >
         <MoreVertIcon className={classes.moreBtn} />
       </Fab>
@@ -41,11 +46,15 @@ export const MoreBtn = ({ moreBgHoverClass }) => {
           onClick={closeModal}
           className={classes.moreCloseBtn}
         />
-        <CardManageModal closePrevModal={closeModal}>
+        <CardManageModal closePrevModal={closeModal} editedMovie={editedMovie}>
           {<StyledMenuItem>Edit</StyledMenuItem>}
         </CardManageModal>
         <StyledMenuItem onClick={onDeleteItem}>Delete</StyledMenuItem>
-        <DeleteModal IsOpen={IsOpenDelete} setIsOpen={setIsOpenDelete} />
+        <DeleteModal
+          isOpen={isOpenDelete}
+          setIsOpen={setIsOpenDelete}
+          deletedMovie={movie}
+        />
       </StyledMenu>
     </>
   );

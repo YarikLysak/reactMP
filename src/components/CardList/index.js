@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
@@ -7,8 +7,6 @@ import {
   fetchMovies,
   fetchGenres,
   fetchSortBy,
-  selectMovie,
-  selectSortedBy,
 } from "../../store/actions/actionCreators";
 
 import CardListHead from "./CardListHead";
@@ -24,36 +22,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ClassList = ({
-  movieList,
-  genres,
-  sortBy,
-  fetchMovies,
-  fetchGenres,
-  fetchSortBy,
-  selectMovie,
-  selectSortedBy,
-}) => {
+const ClassList = () => {
   const { cardsListWrapper } = useStyles();
 
+  const {
+    movies: { movieList },
+    genres,
+  } = useSelector((state) => state);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchMovies();
-    fetchGenres();
-    fetchSortBy();
+    dispatch(fetchMovies());
+    dispatch(fetchGenres());
+    dispatch(fetchSortBy());
   }, []);
 
   return (
     <div className={cardsListWrapper}>
-      <CardListHead
-        count={movieList.length}
-        genres={genres}
-        sortBy={sortBy}
-        selectSortedBy={selectSortedBy}
-      />
+      <CardListHead count={movieList.length} genres={genres} />
       <Grid container spacing={5}>
         {movieList.map((movie) => (
           <Grid item xs={4} key={movie.id}>
-            <CardItem movie={movie} selectMovie={selectMovie} />
+            <CardItem movie={movie} />
           </Grid>
         ))}
       </Grid>
@@ -61,18 +52,4 @@ const ClassList = ({
   );
 };
 
-const mapStateToProps = ({ movies: { movieList }, genres, sortBy }) => {
-  return {
-    movieList,
-    genres,
-    sortBy,
-  };
-};
-
-export default connect(mapStateToProps, {
-  fetchMovies,
-  fetchGenres,
-  fetchSortBy,
-  selectMovie,
-  selectSortedBy,
-})(ClassList);
+export default ClassList;

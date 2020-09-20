@@ -1,14 +1,17 @@
 import React, { useCallback } from "react";
-import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import { FormControl, Select, MenuItem, Typography } from "@material-ui/core";
 import { cardListSortStyles } from "./CardListSort.styles";
+import { selectSortedBy } from "../../../../store/actions/actionCreators";
 
-const CardListSort = ({ sortBy, selectSortedBy }) => {
+const CardListSort = () => {
   const { sortByWrapper, sortBySelect, icon } = cardListSortStyles();
+  const { sortBy } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const handleChange = useCallback(
     ({ target: { value } }) =>
-      selectSortedBy(sortBy.find(({ code }) => code === value)),
+      dispatch(selectSortedBy(sortBy.find(({ code }) => code === value))),
     [sortBy]
   );
 
@@ -40,8 +43,3 @@ const CardListSort = ({ sortBy, selectSortedBy }) => {
   );
 };
 export default CardListSort;
-
-CardListSort.propTypes = {
-  sortBy: PropTypes.array.isRequired,
-  selectSortedBy: PropTypes.func.isRequired,
-};

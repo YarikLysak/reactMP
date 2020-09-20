@@ -2,7 +2,14 @@ import React from "react";
 import { cardManageBodyStyles } from "./CardModalBody.styles";
 import { TextField } from "@material-ui/core";
 
-export const CardModalFormInput = ({ title, id, ...rest }) => {
+export const CardModalFormInput = ({
+  title,
+  id,
+  value,
+  setData,
+  changeKey,
+  ...rest
+}) => {
   const { formFieldWrapper, cardModalInput } = cardManageBodyStyles();
 
   return (
@@ -13,6 +20,8 @@ export const CardModalFormInput = ({ title, id, ...rest }) => {
         className={cardModalInput}
         variant="outlined"
         fullWidth
+        value={value}
+        onChange={(e) => setData(e.target.value)}
         {...rest}
       />
     </div>

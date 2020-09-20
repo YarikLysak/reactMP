@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { Modal, Typography, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/styles";
+import { deleteMovie } from "../../store/actions/actionCreators";
 
 const styles = makeStyles((theme) => ({
   deleteModal: {
@@ -31,7 +33,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-const DeleteModal = ({ IsOpen, setIsOpen }) => {
+const DeleteModal = ({ isOpen, setIsOpen, deletedMovie }) => {
   const {
     deleteModal,
     deleteModalBody,
@@ -39,10 +41,17 @@ const DeleteModal = ({ IsOpen, setIsOpen }) => {
     deleteConfirmBtn,
   } = styles();
 
+  const dispatch = useDispatch();
+
+  const handleConfirm = () => {
+    dispatch(deleteMovie(deletedMovie));
+    setIsOpen(false);
+  };
+
   return (
     <Modal
       className={deleteModal}
-      open={IsOpen}
+      open={isOpen}
       onClose={() => setIsOpen(false)}
     >
       <div className={deleteModalBody}>
@@ -61,7 +70,7 @@ const DeleteModal = ({ IsOpen, setIsOpen }) => {
           className={deleteConfirmBtn}
           color="secondary"
           variant="contained"
-          onClick={() => setIsOpen(false)}
+          onClick={handleConfirm}
         >
           Confirm
         </Button>

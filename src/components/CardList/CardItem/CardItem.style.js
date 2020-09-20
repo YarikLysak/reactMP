@@ -5,18 +5,22 @@ export const cardItemStyles = ({ link }) =>
     card: {
       position: "relative",
       height: "35em",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
       padding: theme.spacing(2, 2, 0),
-      cursor: "pointer",
 
       "&:hover $moreBgHover": {
         visibility: "visible",
       },
     },
+    cardInfo: {
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      cursor: "pointer",
+    },
     cardImage: {
       height: "100%",
+      maxHeight: "80%",
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
       backgroundImage: `url(${link})`,
@@ -35,6 +39,7 @@ export const cardItemStyles = ({ link }) =>
       marginTop: "0.5em",
     },
     yearBlock: {
+      maxHeight: "1.6em",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",

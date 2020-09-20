@@ -1,118 +1,142 @@
 {
-    "sortBy": [{
-            "code": "1",
-            "title": "year",
-            "selected": true
-        },
-        {
-            "code": "2",
-            "title": "title",
-            "selected": false
-        },
-        {
-            "code": "3",
-            "title": "rate",
-            "selected": false
-        }
-    ],
-    "genres": [{
-            "code": null,
-            "title": "All"
-        },
-        {
-            "code": "0",
-            "title": "documentary"
-        },
-        {
-            "code": "1",
-            "title": "comedy"
-        },
-        {
-            "code": "2",
-            "title": "horror"
-        },
-        {
-            "code": "3",
-            "title": "crime"
-        }
-    ],
-    "movieList": [{
-            "id": "1",
-            "title": "Pulp fiction",
-            "subTitle": "Action & Adventure",
-            "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
-            "time": "178",
-            "rate": 8.9,
-            "year": "1994",
-            "photo": {
-                "link": "./src/assets/images/pulp-fiction.jpg",
-                "title": "Pulp fiction"
-            }
-        },
-        {
-            "id": "2",
-            "title": "Bohemian rhapsody",
-            "subTitle": "Drama, Biography, Music",
-            "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
-            "time": "133",
-            "rate": 8,
-            "year": "2018",
-            "photo": {
-                "link": "./src/assets/images/bohemian-rhapsody.png",
-                "title": "Bohemian rhapsody"
-            }
-        },
-        {
-            "id": "3",
-            "title": "Kill Bill: Vol 2",
-            "subTitle": "Oscar Winning Movie",
-            "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
-            "time": "138",
-            "rate": 8,
-            "year": "2004",
-            "photo": {
-                "link": "./src/assets/images/kill-bill-2.jpg",
-                "title": "Kill Bill: Vol 2"
-            }
-        },
-        {
-            "id": "4",
-            "title": "Avengers: InfinityWar",
-            "subTitle": "Action & Adventure",
-            "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
-            "time": "160",
-            "rate": 8.4,
-            "year": "2018",
-            "photo": {
-                "link": "./src/assets/images/infinity-war.jpg",
-                "title": "Avengers: InfinityWar"
-            }
-        },
-        {
-            "id": "5",
-            "title": "Inception",
-            "subTitle": "Action & Adventure",
-            "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
-            "time": "162",
-            "rate": 8.8,
-            "year": "2010",
-            "photo": {
-                "link": "./src/assets/images/inception.jpg",
-                "title": "Inception"
-            }
-        },
-        {
-            "id": "6",
-            "title": "Reservoir dogs",
-            "subTitle": "Oscar Winning Movie",
-            "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
-            "time": "100",
-            "rate": 8.3,
-            "year": "1992",
-            "photo": {
-                "link": "./src/assets/images/reservoir_dogs.jpg",
-                "title": "Reservoir dogs"
-            }
-        }
-    ]
+  "sortBy": [
+    {
+      "code": "1",
+      "title": "year",
+      "selected": true
+    },
+    {
+      "code": "2",
+      "title": "title",
+      "selected": false
+    },
+    {
+      "code": "3",
+      "title": "rate",
+      "selected": false
+    }
+  ],
+  "genres": [
+    {
+      "code": "0",
+      "title": "Action"
+    },
+    {
+      "code": "1",
+      "title": "Adventure"
+    },
+    {
+      "code": "2",
+      "title": "Biography"
+    },
+    {
+      "code": "3",
+      "title": "Oscar Winning Movie"
+    },
+    {
+      "code": "4",
+      "title": "Music"
+    },
+    {
+      "code": "5",
+      "title": "Drama"
+    }
+  ],
+  "movieList": [
+    {
+      "id": "1",
+      "title": "Pulp fiction",
+      "genres": [
+        "0",
+        "1"
+      ],
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+      "runTime": "178",
+      "rate": 8.9,
+      "year": "1994-01-01",
+      "photo": {
+        "link": "./src/assets/images/pulp-fiction.jpg",
+        "title": "Pulp fiction"
+      }
+    },
+    {
+      "id": "2",
+      "title": "Bohemian rhapsody",
+      "genres": [
+        "5",
+        "2",
+        "4"
+      ],
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+      "runTime": "133",
+      "rate": 8,
+      "year": "2018-01-01",
+      "photo": {
+        "link": "./src/assets/images/bohemian-rhapsody.png",
+        "title": "Bohemian rhapsody"
+      }
+    },
+    {
+      "id": "3",
+      "title": "Kill Bill: Vol 2",
+      "genres": [
+        "3"
+      ],
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+      "runTime": "138",
+      "rate": 8,
+      "year": "2004-01-01",
+      "photo": {
+        "link": "./src/assets/images/kill-bill-2.jpg",
+        "title": "Kill Bill: Vol 2"
+      }
+    },
+    {
+      "id": "4",
+      "title": "Avengers: InfinityWar",
+      "genres": [
+        "0",
+        "1"
+      ],
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+      "runTime": "160",
+      "rate": 8.4,
+      "year": "2018-01-01",
+      "photo": {
+        "link": "./src/assets/images/infinity-war.jpg",
+        "title": "Avengers: InfinityWar"
+      }
+    },
+    {
+      "id": "5",
+      "title": "Inception",
+      "genres": [
+        "0",
+        "1"
+      ],
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+      "runTime": "162",
+      "rate": 8.8,
+      "year": "2010-01-01",
+      "photo": {
+        "link": "./src/assets/images/inception.jpg",
+        "title": "Inception"
+      }
+    },
+    {
+      "id": "6",
+      "title": "Reservoir dogs",
+      "genres": [
+        "3"
+      ],
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+      "runTime": "100",
+      "rate": 8.3,
+      "year": "1992-01-01",
+      "photo": {
+        "link": "./src/assets/images/reservoir_dogs.jpg",
+        "title": "Reservoir dogs"
+      }
+    }
+  ]
 }

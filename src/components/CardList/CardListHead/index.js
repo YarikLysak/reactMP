@@ -6,7 +6,7 @@ import CardListGenre from "./CardListGenre";
 import CardListSort from "./CardListSort";
 import { cardListStyles } from "./CardList.styles";
 
-const CardListHead = ({ count, genres, sortBy, selectSortedBy }) => {
+const CardListHead = ({ count, genres }) => {
   const {
     filterWrapper,
     filterBlock,
@@ -18,13 +18,13 @@ const CardListHead = ({ count, genres, sortBy, selectSortedBy }) => {
     <Grid container>
       <Grid item xs={12} className={filterWrapper}>
         <Grid container className={filterBlock}>
-          <Grid item xs={6} className={filterGenres}>
+          <Grid item xs={9} className={filterGenres}>
             {genres.map((genre) => (
               <CardListGenre key={genre.code} genre={genre} />
             ))}
           </Grid>
-          <Grid item xs={6}>
-            <CardListSort sortBy={sortBy} selectSortedBy={selectSortedBy} />
+          <Grid item xs={3}>
+            <CardListSort />
           </Grid>
         </Grid>
       </Grid>
@@ -42,6 +42,4 @@ export default CardListHead;
 CardListHead.propTypes = {
   count: PropTypes.number.isRequired,
   genres: PropTypes.array.isRequired,
-  sortBy: PropTypes.array.isRequired,
-  selectSortedBy: PropTypes.func.isRequired,
 };
