@@ -19,6 +19,21 @@ export const cardListStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
   },
 
+  filterItem: {
+    "&:hover": {
+      color: theme.pink,
+      backgroundColor: "transparent",
+    },
+    "&.Mui-selected": {
+      color: theme.white,
+      backgroundColor: theme.pink,
+
+      "&:hover": {
+        backgroundColor: theme.pink,
+      },
+    },
+  },
+
   filterInfo: {
     margin: "1em 0",
     color: theme.white,

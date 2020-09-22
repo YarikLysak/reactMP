@@ -7,16 +7,16 @@ import Logo from "../Logo";
 import { headerStyles } from "./Header.styles";
 import { CardManageModal } from "../../CardManageModals";
 
-const Header = ({ isSearch, setViewState }) => {
+const Header = ({ movieView, selectSearch }) => {
   const { header, addButton, searchButton } = headerStyles();
 
-  const handleClick = useCallback(() => setViewState({ type: "search" }));
+  const handleClick = useCallback(() => selectSearch());
 
   return (
     <div className={header}>
       <Logo />
       {(() =>
-        isSearch ? (
+        !movieView ? (
           <CardManageModal>
             <Button
               variant="outlined"

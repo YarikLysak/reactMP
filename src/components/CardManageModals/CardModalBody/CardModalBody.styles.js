@@ -31,7 +31,7 @@ export const cardManageBodyStyles = makeStyles((theme) => ({
   },
   cardModalInput: {
     color: theme.white,
-    backgroundColor: theme.lightGray,
+    backgroundColor: theme.gray,
 
     "& input": {
       color: theme.white,
@@ -48,7 +48,7 @@ export const cardManageBodyStyles = makeStyles((theme) => ({
       },
     },
 
-    "&:not([multiple]) select": {
+    "& select": {
       textTransform: "capitalize",
       "& option": {
         backgroundColor: theme.lightGray,
@@ -65,6 +65,20 @@ export const cardManageBodyStyles = makeStyles((theme) => ({
     "& button": {
       marginLeft: theme.spacing(1),
     },
+  },
+  cardMultiselect: {
+    textTransform: "capitalize",
+    "label + &": {
+      marginTop: 0,
+    },
+  },
+  cardMultiselectCheckbox: {
+    "& .MuiIconButton-label": {
+      color: theme.pink,
+    },
+  },
+  cardMultiselectItem: {
+    textTransform: "capitalize",
   },
   icon: {
     fill: theme.pink,

@@ -20,9 +20,12 @@ const CardManageModal = (props) => {
   return (
     <>
       {cloneElement(props.children, {
-        onClick: () => {
+        onClick: (e) => {
           if (props.closePrevModal) {
             props.closePrevModal();
+          }
+          if (props.setEditMovie) {
+            props.setEditMovie(e);
           }
           openModal();
         },
@@ -32,7 +35,10 @@ const CardManageModal = (props) => {
         open={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        {CardModalBody({ setIsOpen: setIsOpen })}
+        {CardModalBody({
+          setIsOpen: setIsOpen,
+          editedMovie: props.editedMovie,
+        })}
       </Modal>
     </>
   );
