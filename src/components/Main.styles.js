@@ -1,7 +1,8 @@
 import { createMuiTheme, makeStyles } from "@material-ui/core";
 
 export const theme = createMuiTheme({
-  pink: "#f65261",
+  pink: "#f50057",
+  // pink: "#f65261",
   gray: "#555555",
   darkGray: "#232323",
   lightGray: "#939393",

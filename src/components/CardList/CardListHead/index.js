@@ -16,6 +16,7 @@ const CardListHead = ({ count, genres }) => {
     filterWrapper,
     filterBlock,
     filterGenres,
+    filterItem,
     filterInfo,
   } = cardListStyles();
   const dispatch = useDispatch();
@@ -36,7 +37,11 @@ const CardListHead = ({ count, genres }) => {
               onChange={handleClick}
             >
               {genres.list.map((genre) => (
-                <ToggleButton key={genre.code} value={genre.code}>
+                <ToggleButton
+                  key={genre.code}
+                  value={genre.code}
+                  className={filterItem}
+                >
                   {genre.title}
                 </ToggleButton>
               ))}

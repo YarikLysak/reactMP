@@ -32,6 +32,7 @@ export const StyledMenu = withStyles((theme) => ({
 
 export const StyledMenuItem = withStyles((theme) => ({
   root: {
+    textTransform: "capitalize",
     "&:hover": {
       backgroundColor: theme.pink,
     },

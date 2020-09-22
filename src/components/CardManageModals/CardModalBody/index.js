@@ -23,39 +23,45 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
   const dispatch = useDispatch();
 
   const genres = useSelector((state) => state.genres.list);
-  const [title, setTitle] = useState("");
-  const [year, setYear] = useState("");
-  const [selectedGenres, setSelectedGenres] = useState([]);
-  const [description, setDescription] = useState("");
-  const [runTime, setRunTime] = useState("");
+  const [form, setFormFieldsData] = useState({
+    title: "",
+    year: "",
+    genres: [],
+    description: "",
+    runTime: "",
+  });
 
   useEffect(() => {
     if (editedMovie) {
-      setTitle(editedMovie.title);
-      setYear(editedMovie.year);
-      setSelectedGenres(editedMovie.genres);
-      setDescription(editedMovie.description);
-      setRunTime(editedMovie.runTime);
+      setFormFieldsData({
+        title: editedMovie.title,
+        year: editedMovie.year,
+        genres: [...editedMovie.genres],
+        description: editedMovie.description,
+        runTime: editedMovie.runTime,
+      });
     }
   }, [editedMovie]);
 
   const handleChange = ({ target }) => {
-    setSelectedGenres(target.value);
+    setFormFieldsData({ ...form, genres: target.value });
   };
 
   const onReset = () => {
-    editedMovie = null;
-    console.log("Reset");
+    setFormFieldsData({
+      title: "",
+      year: "",
+      genres: [],
+      description: "",
+      runTime: "",
+    });
     setIsOpen(false);
   };
 
   const onSave = () => {
     const newMovieData = {
-      title,
-      year,
-      description,
-      runTime,
-      genres: [...selectedGenres],
+      ...form,
+      genres: [...form.genres],
     };
 
     if (editedMovie) {
@@ -73,8 +79,7 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
       dispatch(addMovie(newMovieData));
     }
 
-    console.log("Save");
-    setIsOpen(false);
+    onReset();
   };
 
   const Props = {
@@ -114,9 +119,9 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
       id: "manage-title",
       title: "Title",
       placeholder: "Title here",
-      value: title,
+      value: form.title,
       inputProps: null,
-      setData: setTitle,
+      setData: (title) => setFormFieldsData({ ...form, title }),
     },
     {
       id: "manage-release-date",
@@ -128,24 +133,24 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
           <DateRangeOutlinedIcon className={classes.inputDateIcon} />
         ),
       },
-      value: year,
-      setData: setYear,
+      value: form.year,
+      setData: (year) => setFormFieldsData({ ...form, year }),
     },
     {
       id: "manage-overview",
       title: "Overview",
       placeholder: "Overview here",
-      value: description,
+      value: form.description,
       inputProps: null,
-      setData: setDescription,
+      setData: (description) => setFormFieldsData({ ...form, description }),
     },
     {
       id: "manage-runtime",
       title: "Runtime",
       placeholder: "Runtime here",
-      value: runTime,
+      value: form.runTime,
       inputProps: null,
-      setData: setRunTime,
+      setData: (runTime) => setFormFieldsData({ ...form, runTime }),
     },
   ];
 
@@ -188,7 +193,7 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
               <label htmlFor="manage-genres">Genres</label>
               <Select
                 className={classes.cardMultiselect}
-                value={selectedGenres}
+                value={form.genres}
                 onChange={handleChange}
                 multiple
                 displayEmpty
@@ -217,7 +222,7 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
                   <MenuItem key={genre.code} value={genre.code}>
                     <Checkbox
                       className={classes.cardMultiselectCheckbox}
-                      checked={selectedGenres.indexOf(genre.code) > -1}
+                      checked={form.genres.indexOf(genre.code) > -1}
                     />
                     <ListItemText
                       className={classes.cardMultiselectItem}

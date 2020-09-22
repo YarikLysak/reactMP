@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Modal, Typography, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/styles";
-import { deleteMovie } from "../../store/actions/actionCreators";
+import { deleteMovie, selectSearch } from "../../store/actions/actionCreators";
 
 const styles = makeStyles((theme) => ({
   deleteModal: {
@@ -45,6 +45,7 @@ const DeleteModal = ({ isOpen, setIsOpen, deletedMovie }) => {
 
   const handleConfirm = () => {
     dispatch(deleteMovie(deletedMovie));
+    dispatch(selectSearch());
     setIsOpen(false);
   };
 
