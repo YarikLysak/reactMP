@@ -54,9 +54,9 @@ const CardList = () => {
   return (
     <div className={cardsListWrapper}>
       <CardListHead count={filteredMovieList.length} genres={genres} />
-      <Grid container spacing={5}>
+      <Grid container spacing={6}>
         {getMovieList().map((movie) => (
-          <Grid item xs={4} key={movie.id}>
+          <Grid item sm={4} lg={3} key={movie.id}>
             <CardItem movie={movie} />
           </Grid>
         ))}
