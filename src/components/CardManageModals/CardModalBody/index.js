@@ -8,9 +8,11 @@ import {
   MenuItem,
   Checkbox,
   ListItemText,
+  FormHelperText,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
+import { useFormik } from "formik";
 
 import Logo from "../../Core/Logo";
 import { CardModalFormInput } from "./CardModalFormInput";
@@ -43,10 +45,6 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
     }
   }, [editedMovie]);
 
-  const handleChange = ({ target }) => {
-    setFormFieldsData({ ...form, genres: target.value });
-  };
-
   const onReset = () => {
     setFormFieldsData({
       title: "",
@@ -55,13 +53,14 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
       description: "",
       runTime: "",
     });
+    manageForm.resetForm();
     setIsOpen(false);
   };
 
-  const onSave = () => {
+  const onSave = (formValues) => {
     const newMovieData = {
-      ...form,
-      genres: [...form.genres],
+      ...formValues,
+      genres: [...formValues.genres],
     };
 
     if (editedMovie) {
@@ -116,15 +115,14 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
 
   const formInputs = [
     {
-      id: "manage-title",
+      id: "title",
       title: "Title",
       placeholder: "Title here",
       value: form.title,
       inputProps: null,
-      setData: (title) => setFormFieldsData({ ...form, title }),
     },
     {
-      id: "manage-release-date",
+      id: "year",
       title: "Release Date",
       placeholder: "Select Date",
       type: "date",
@@ -134,25 +132,40 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
         ),
       },
       value: form.year,
-      setData: (year) => setFormFieldsData({ ...form, year }),
     },
     {
-      id: "manage-overview",
+      id: "description",
       title: "Overview",
       placeholder: "Overview here",
       value: form.description,
       inputProps: null,
-      setData: (description) => setFormFieldsData({ ...form, description }),
     },
     {
-      id: "manage-runtime",
+      id: "runTime",
       title: "Runtime",
       placeholder: "Runtime here",
       value: form.runTime,
       inputProps: null,
-      setData: (runTime) => setFormFieldsData({ ...form, runTime }),
     },
   ];
+
+  const manageForm = useFormik({
+    initialValues: form,
+    validate: ({ title, genres }) => {
+      const errors = {};
+      if (!title) {
+        errors.title = "Required";
+      }
+      if (!genres.length) {
+        errors.genres = "Required";
+      }
+      return errors;
+    },
+    onSubmit: (values, { setSubmitting }) => {
+      setSubmitting(false);
+      onSave(values);
+    },
+  });
 
   return (
     <>
@@ -168,8 +181,7 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
         </Typography>
         <form
           className={classes.cardModalBodyForm}
-          autoComplete="off"
-          noValidate
+          onSubmit={manageForm.handleSubmit}
         >
           {formInputs.map((input, i) => {
             return (
@@ -180,21 +192,25 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
                 title={input.title}
                 type={input.type}
                 placeholder={input.placeholder}
-                value={input.value}
+                value={manageForm.values[input.id]}
                 InputProps={input.inputProps}
-                setData={input.setData}
+                error={!!manageForm.errors[input.id]}
+                helperText={manageForm.errors[input.id]}
+                onChange={manageForm.handleChange}
+                onBlur={manageForm.handleBlur}
               />
             );
           })}
 
           {/* Genres */}
           <div className={classes.formFieldWrapper}>
-            <FormControl>
+            <FormControl error={!!manageForm.errors.genres}>
               <label htmlFor="manage-genres">Genres</label>
               <Select
                 className={classes.cardMultiselect}
-                value={form.genres}
-                onChange={handleChange}
+                value={manageForm.values.genres}
+                onChange={manageForm.handleChange}
+                onBlur={manageForm.handleBlur}
                 multiple
                 displayEmpty
                 inputProps={Props.selectInput}
@@ -222,7 +238,9 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
                   <MenuItem key={genre.code} value={genre.code}>
                     <Checkbox
                       className={classes.cardMultiselectCheckbox}
-                      checked={form.genres.indexOf(genre.code) > -1}
+                      checked={
+                        manageForm.values.genres.indexOf(genre.code) > -1
+                      }
                     />
                     <ListItemText
                       className={classes.cardMultiselectItem}
@@ -231,6 +249,7 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
                   </MenuItem>
                 ))}
               </Select>
+              <FormHelperText>{manageForm.errors.genres}</FormHelperText>
             </FormControl>
           </div>
 
@@ -247,7 +266,7 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
               variant="contained"
               color="secondary"
               fullWidth
-              onClick={onSave}
+              type="submit"
             >
               Save
             </Button>

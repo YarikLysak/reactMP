@@ -21,7 +21,6 @@ export const CardModalFormInput = ({
         variant="outlined"
         fullWidth
         value={value}
-        onChange={(e) => setData(e.target.value)}
         {...rest}
       />
     </div>

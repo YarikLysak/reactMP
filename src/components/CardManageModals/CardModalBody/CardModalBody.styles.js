@@ -30,11 +30,10 @@ export const cardManageBodyStyles = makeStyles((theme) => ({
     margin: theme.spacing(2, 0),
   },
   cardModalInput: {
-    color: theme.white,
-    backgroundColor: theme.gray,
-
-    "& input": {
+    "& .MuiInputBase-root": {
       color: theme.white,
+      backgroundColor: theme.gray,
+
       "&::placeholder": {
         color: theme.white,
       },

@@ -4,7 +4,7 @@ export const cardItemStyles = ({ link }) =>
   makeStyles((theme) => ({
     card: {
       position: "relative",
-      height: "35em",
+      height: "30em",
       padding: theme.spacing(2, 2, 0),
 
       "&:hover $moreBgHover": {
@@ -22,7 +22,7 @@ export const cardItemStyles = ({ link }) =>
       height: "100%",
       maxHeight: "80%",
       backgroundRepeat: "no-repeat",
-      backgroundSize: "cover",
+      backgroundSize: "contain",
       backgroundImage: `url(${link})`,
       marginBottom: theme.spacing(2),
     },
