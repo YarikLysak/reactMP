@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexShrink: 0,
     backgroundColor: theme.gray,
+    flexShrink: 0,
   },
 }));
 

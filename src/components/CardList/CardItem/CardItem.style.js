@@ -24,6 +24,7 @@ export const cardItemStyles = ({ link }) =>
       backgroundRepeat: "no-repeat",
       backgroundSize: "contain",
       backgroundImage: `url(${link})`,
+      backgroundPosition: "center",
       marginBottom: theme.spacing(2),
     },
     cardTitle: {

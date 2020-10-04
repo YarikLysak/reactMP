@@ -1,6 +1,5 @@
 {
-  "sortBy": [
-    {
+  "sortBy": [{
       "code": "1",
       "title": "year"
     },
@@ -13,12 +12,10 @@
       "title": "rate"
     }
   ],
-  "genres": [
-    {
+  "genres": [{
       "code": "0",
-      "title": "Action"
-    },
-    {
+      "title": "All"
+    }, {
       "code": "1",
       "title": "Adventure"
     },
@@ -37,14 +34,18 @@
     {
       "code": "5",
       "title": "Drama"
+    },
+    {
+      "code": "6",
+      "title": "Action"
     }
   ],
-  "movieList": [
-    {
+  "movieList": [{
       "id": "1",
       "title": "Pulp fiction",
       "genres": [
         "0",
+        "6",
         "1"
       ],
       "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
@@ -60,6 +61,7 @@
       "id": "2",
       "title": "Bohemian rhapsody",
       "genres": [
+        "0",
         "5",
         "2",
         "4"
@@ -77,6 +79,7 @@
       "id": "3",
       "title": "Kill Bill: Vol 2",
       "genres": [
+        "0",
         "3"
       ],
       "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
@@ -93,7 +96,8 @@
       "title": "Avengers: InfinityWar",
       "genres": [
         "0",
-        "1"
+        "1",
+        "6"
       ],
       "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
       "runTime": "160",
@@ -101,7 +105,7 @@
       "year": "2018-01-01",
       "photo": {
         "link": "./src/assets/images/infinity-war.jpg",
-        "title": "Avengers: InfinityWar"
+        "title": "Avengers: Infinity War"
       }
     },
     {
@@ -109,7 +113,8 @@
       "title": "Inception",
       "genres": [
         "0",
-        "1"
+        "1",
+        "6"
       ],
       "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
       "runTime": "162",
@@ -124,6 +129,7 @@
       "id": "6",
       "title": "Reservoir dogs",
       "genres": [
+        "0",
         "3"
       ],
       "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",

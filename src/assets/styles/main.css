@@ -29,12 +29,14 @@ html {
 body {
   margin: 0;
   font-family: 'MontserratLight';
+  background-color: #939393;
 }
 
 #container {
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 /**

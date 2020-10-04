@@ -53,9 +53,11 @@ const CardListHead = ({ count, genres }) => {
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="h6" className={filterInfo}>
-          <b>{count}</b> movies found
-        </Typography>
+        {count ? (
+          <Typography variant="h6" className={filterInfo}>
+            <b>{count}</b> movies found
+          </Typography>
+        ) : null}
       </Grid>
     </Grid>
   );

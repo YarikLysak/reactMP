@@ -4,7 +4,7 @@ export const styles = makeStyles((theme) => ({
   moreBg: {
     position: "absolute",
     right: 0,
-    margin: theme.spacing(1.5, 3),
+    margin: theme.spacing(1.5, 4),
     backgroundColor: theme.darkGray,
     "&:hover": {
       backgroundColor: theme.pink,

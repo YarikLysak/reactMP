@@ -7,34 +7,36 @@ import Logo from "../Logo";
 import { headerStyles } from "./Header.styles";
 import { CardManageModal } from "../../CardManageModals";
 
-const Header = ({ movieView, selectSearch }) => {
+const Header = ({ movieView, selectSearch, hideBtn = false }) => {
   const { header, addButton, searchButton } = headerStyles();
 
   const handleClick = useCallback(() => selectSearch());
 
+  const headerButton = () =>
+    !movieView ? (
+      <CardManageModal>
+        <Button
+          variant="outlined"
+          color="secondary"
+          startIcon={<AddIcon />}
+          className={addButton}
+        >
+          Add movie
+        </Button>
+      </CardManageModal>
+    ) : (
+      <SearchIcon
+        fontSize="large"
+        color="secondary"
+        className={searchButton}
+        onClick={handleClick}
+      />
+    );
+
   return (
     <div className={header}>
       <Logo />
-      {(() =>
-        !movieView ? (
-          <CardManageModal>
-            <Button
-              variant="outlined"
-              color="secondary"
-              startIcon={<AddIcon />}
-              className={addButton}
-            >
-              Add movie
-            </Button>
-          </CardManageModal>
-        ) : (
-          <SearchIcon
-            fontSize="large"
-            color="secondary"
-            className={searchButton}
-            onClick={handleClick}
-          />
-        ))()}
+      {hideBtn ? "" : headerButton()}
     </div>
   );
 };

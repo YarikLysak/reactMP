@@ -9,6 +9,15 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "app.bundle.js",
   },
+  devServer: {
+    historyApiFallback: true,
+    proxy: {
+      "/api": {
+        target: "http://localhost:3000",
+        pathRewrite: { "^/api": "" },
+      },
+    },
+  },
   module: {
     rules: [
       {
@@ -25,13 +34,13 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|svg)$/,
         use: [
           {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "dist/assets/images/",
+              outputPath: "./assets/images/",
             },
           },
         ],
@@ -43,18 +52,7 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "dist/assets/fonts/",
-            },
-          },
-        ],
-      },
-      {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: "svg-url-loader",
-            options: {
-              limit: 10000,
+              outputPath: "./assets/fonts/",
             },
           },
         ],

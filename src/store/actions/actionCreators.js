@@ -1,10 +1,10 @@
 import axios from "axios";
 import actionTypes from "./actionTypes";
 
-const BASE_URL = " http://localhost:3000";
+const BASE_URL = "/api";
 
-export const fetchMovies = () => async (dispatch) => {
-  const res = await axios.get(`${BASE_URL}/movieList`);
+export const fetchSearchMovies = (searchTerm) => async (dispatch) => {
+  const res = await axios.get(`${BASE_URL}/movieList?q=${searchTerm}`);
   dispatch({ type: actionTypes.FETCH_MOVIES, payload: res.data });
 };
 

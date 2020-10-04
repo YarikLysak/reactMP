@@ -1,16 +1,12 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { selectSearch } from "../../../store/actions/actionCreators";
-import Header from "../Header";
 import Search from "../Search";
 import CardDetails from "../../CardList/CardDetails";
 import { useStyles } from "./styles";
 
-const HeaderContainer = () => {
+const Heading = () => {
   const { headingWrapper, headingBg } = useStyles();
-  const dispatch = useDispatch();
-  const onSelectSearch = () => dispatch(selectSearch());
   const {
     movies: { selectedMovie, movieView },
     genres,
@@ -19,7 +15,6 @@ const HeaderContainer = () => {
   return (
     <div className={headingWrapper}>
       <div className={headingBg}></div>
-      <Header movieView={movieView} selectSearch={onSelectSearch} />
       {!movieView ? (
         <Search />
       ) : (
@@ -29,4 +24,4 @@ const HeaderContainer = () => {
   );
 };
 
-export default HeaderContainer;
+export default Heading;
