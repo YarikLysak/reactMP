@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import SearchIcon from "@material-ui/icons/Search";
@@ -25,12 +26,14 @@ const Header = ({ movieView, selectSearch, hideBtn = false }) => {
         </Button>
       </CardManageModal>
     ) : (
-      <SearchIcon
-        fontSize="large"
-        color="secondary"
-        className={searchButton}
-        onClick={handleClick}
-      />
+      <Link to="/">
+        <SearchIcon
+          fontSize="large"
+          color="secondary"
+          className={searchButton}
+          onClick={handleClick}
+        />
+      </Link>
     );
 
   return (

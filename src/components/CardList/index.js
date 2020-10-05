@@ -4,6 +4,11 @@ import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
 import { fetchGenres, fetchSortBy } from "../../store/actions/actionCreators";
+import {
+  useFilteredMoviesState,
+  useGenresState,
+  useSortByState,
+} from "../../store/selectors/moviesStateSelector";
 
 import CardListHead from "./CardListHead";
 import CardItem from "./CardItem";
@@ -20,8 +25,9 @@ const useStyles = makeStyles((theme) => ({
 
 const CardList = () => {
   const { cardsListWrapper } = useStyles();
-  const { movies, genres, sortBy } = useSelector((state) => state);
-  const { filteredMovieList } = movies;
+  const genres = useSelector(useGenresState);
+  const sortBy = useSelector(useSortByState);
+  const filteredMovieList = useSelector(useFilteredMoviesState);
   const dispatch = useDispatch();
 
   useEffect(() => {

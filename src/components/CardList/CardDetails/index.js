@@ -1,10 +1,31 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router";
 import { Grid } from "@material-ui/core";
 
 import { cardDetailsStyles } from "./styles";
+import { fetchGenres } from "../../../store/actions/actionCreators";
+import { fetchMovieById } from "../../../store/actions/moviesActionCreators";
+import {
+  useGenresListState,
+  useSelectedMovie,
+} from "../../../store/selectors/moviesStateSelector";
 
-const CardDetails = (props) => {
+const CardDetails = () => {
+  const { id } = useParams();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const movie = useSelector(useSelectedMovie);
+  const genreList = useSelector(useGenresListState);
+
+  useEffect(() => {
+    console.log("useEffect", id, movie, genreList);
+    if (!movie || !genreList.length || id !== movie.id) {
+      dispatch(fetchMovieById(id, history));
+      dispatch(fetchGenres());
+    }
+  });
+
   const setRateColor = (rate) => {
     if (rate > 8.5) {
       return "limegreen";
@@ -15,8 +36,8 @@ const CardDetails = (props) => {
   };
 
   const cardStyles = cardDetailsStyles({
-    link: props.photo.link,
-    rateColor: setRateColor(props.rate),
+    link: movie?.photo.link,
+    rateColor: setRateColor(movie?.rate),
   });
 
   return (
@@ -25,37 +46,25 @@ const CardDetails = (props) => {
       <Grid item xs={8}>
         <Grid container spacing={3} className={cardStyles.cardTitleWrapper}>
           <Grid item xs={10}>
-            <h2 className={cardStyles.cardTitle}>{props.title}</h2>
+            <h2 className={cardStyles.cardTitle}>{movie?.title}</h2>
           </Grid>
           <Grid item xs={2}>
-            <div className={cardStyles.cardRate}>{props.rate}</div>
+            <div className={cardStyles.cardRate}>{movie?.rate}</div>
           </Grid>
         </Grid>
         <p className={cardStyles.cardSubTitle}>
-          {props.genreList
-            .filter(({ code }) => props.genres.includes(code))
+          {genreList
+            .filter(({ code }) => code !== "0" && movie?.genres.includes(code))
             .map(({ title }) => title)
             .join(", ")}
         </p>
         <div style={{ display: "flex" }}>
-          <div className={cardStyles.cardPink}>{props.year.split("-")[0]}</div>
-          <div className={cardStyles.cardPink}>{props.runTime} min</div>
+          <div className={cardStyles.cardPink}>{movie?.year.split("-")[0]}</div>
+          <div className={cardStyles.cardPink}>{movie?.runTime} min</div>
         </div>
-        <p className={cardStyles.cardDescription}>{props.description}</p>
+        <p className={cardStyles.cardDescription}>{movie?.description}</p>
       </Grid>
     </Grid>
   );
 };
 export default CardDetails;
-
-CardDetails.propTypes = {
-  genreList: PropTypes.array.isRequired,
-  id: PropTypes.string,
-  title: PropTypes.string,
-  genres: PropTypes.array,
-  description: PropTypes.string,
-  runTime: PropTypes.string,
-  rate: PropTypes.number,
-  year: PropTypes.string,
-  photo: PropTypes.object,
-};

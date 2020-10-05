@@ -1,4 +1,4 @@
-import actionTypes from "../actions/actionTypes";
+import { actionTypes } from "../../assets/constants";
 
 const moviesInitState = {
   movieList: [],
@@ -15,6 +15,8 @@ const moviesReducer = (state = moviesInitState, { type, payload }) => {
         movieList: [...payload],
         filteredMovieList: [...payload],
       };
+    case actionTypes.FETCH_MOVIE_BY_ID:
+      return { ...state, selectedMovie: { ...payload }, movieView: true };
     case actionTypes.EDIT_MOVIE:
       const updatedList = [...state.movieList].map(
         (movie) => (movie = movie.id === payload.id ? payload : movie)
@@ -50,8 +52,6 @@ const moviesReducer = (state = moviesInitState, { type, payload }) => {
         ...state,
         filteredMovieList: filteredList,
       };
-    case actionTypes.SELECT_MOVIE:
-      return { ...state, selectedMovie: { ...payload }, movieView: true };
     case actionTypes.SELECT_SEARCH:
       return { ...state, selectedMovie: null, movieView: false };
     default:

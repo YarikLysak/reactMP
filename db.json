@@ -1,5 +1,6 @@
 {
-  "sortBy": [{
+  "sortBy": [
+    {
       "code": "1",
       "title": "year"
     },
@@ -12,10 +13,12 @@
       "title": "rate"
     }
   ],
-  "genres": [{
+  "genres": [
+    {
       "code": "0",
       "title": "All"
-    }, {
+    },
+    {
       "code": "1",
       "title": "Adventure"
     },
@@ -40,7 +43,8 @@
       "title": "Action"
     }
   ],
-  "movieList": [{
+  "movieList": [
+    {
       "id": "1",
       "title": "Pulp fiction",
       "genres": [

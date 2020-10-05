@@ -6,12 +6,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header, Home, PageNotFound, Footer } from "./Core";
 import { theme, useStyles } from "./Main.styles";
 import { selectSearch } from "../store/actions/actionCreators";
+import { useMovieView } from "../store/selectors/moviesStateSelector";
 
 const Main = () => {
   const { wrapper, contentWrapper } = useStyles();
   const dispatch = useDispatch();
   const onSelectSearch = () => dispatch(selectSearch());
-  const { movieView } = useSelector((state) => state.movies);
+  const movieView = useSelector(useMovieView);
 
   return (
     <div className={wrapper}>
@@ -20,8 +21,8 @@ const Main = () => {
           <div className={contentWrapper}>
             <Header movieView={movieView} selectSearch={onSelectSearch} />
             <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/**" component={PageNotFound} />
+              <Route path={["/", "/film/:id"]} exact component={Home} />
+              <Route path={["", "/404"]} component={PageNotFound} />
             </Switch>
           </div>
         </Router>

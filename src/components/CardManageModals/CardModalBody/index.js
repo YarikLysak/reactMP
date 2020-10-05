@@ -18,13 +18,17 @@ import Logo from "../../Core/Logo";
 import { CardModalFormInput } from "./CardModalFormInput";
 import { cardManageBodyStyles } from "./CardModalBody.styles";
 import { theme } from "../../Main.styles";
-import { addMovie, updateMovie } from "../../../store/actions/actionCreators";
+import {
+  updateMovie,
+  addMovie,
+} from "../../../store/actions/moviesActionCreators";
+import { useGenresListState } from "../../../store/selectors/moviesStateSelector";
 
 const CardModalBody = ({ setIsOpen, editedMovie }) => {
   const classes = cardManageBodyStyles();
   const dispatch = useDispatch();
 
-  const genres = useSelector((state) => state.genres.list);
+  const genres = useSelector(useGenresListState);
   const [form, setFormFieldsData] = useState({
     title: "",
     year: "",
@@ -58,9 +62,12 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
   };
 
   const onSave = (formValues) => {
+    const newGenres = formValues.genres.includes("0")
+      ? [...genres].map(({ code }) => code)
+      : [...formValues.genres];
     const newMovieData = {
       ...formValues,
-      genres: [...formValues.genres],
+      genres: newGenres,
     };
 
     if (editedMovie) {
@@ -75,6 +82,7 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
         title: "No picture found",
       };
       newMovieData.rate = 0;
+      console.log("newMovieData", newMovieData);
       dispatch(addMovie(newMovieData));
     }
 
@@ -223,11 +231,11 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
                         Select Genre
                       </span>
                     );
+                  } else if (selected.includes("0")) {
+                    return genres.map((item) => item.title).join(", ");
                   }
                   return selected
-                    .map(
-                      (value) => genres.find(({ code }) => value === code).title
-                    )
+                    .map((val) => genres.find(({ code }) => val === code).title)
                     .join(", ");
                 }}
               >
@@ -238,9 +246,12 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
                   <MenuItem key={genre.code} value={genre.code}>
                     <Checkbox
                       className={classes.cardMultiselectCheckbox}
-                      checked={
-                        manageForm.values.genres.indexOf(genre.code) > -1
-                      }
+                      checked={(() => {
+                        let list = manageForm.values.genres;
+                        return (
+                          list.includes("0") || list.indexOf(genre.code) > -1
+                        );
+                      })()}
                     />
                     <ListItemText
                       className={classes.cardMultiselectItem}

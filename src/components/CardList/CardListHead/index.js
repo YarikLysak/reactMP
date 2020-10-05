@@ -6,10 +6,8 @@ import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab";
 
 import CardListSort from "./CardListSort";
 import { cardListStyles } from "./CardList.styles";
-import {
-  filterMovies,
-  seFilterBy,
-} from "../../../store/actions/actionCreators";
+import { seFilterBy } from "../../../store/actions/actionCreators";
+import { filterMovies } from "../../../store/actions/moviesActionCreators";
 
 const CardListHead = ({ count, genres }) => {
   const {

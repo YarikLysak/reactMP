@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { TextField, Button } from "@material-ui/core";
 
 import { useStyles } from "./styles";
-import { fetchSearchMovies } from "../../../store/actions/actionCreators";
+import { fetchSearchMovies } from "../../../store/actions/moviesActionCreators";
 
 const Search = () => {
   const classes = useStyles();
@@ -12,6 +12,7 @@ const Search = () => {
 
   const onSearch = () => {
     dispatch(fetchSearchMovies(searchTerm ? searchTerm : null));
+    setSearchTerm("");
   };
 
   const keyPress = (e) => {
@@ -36,6 +37,7 @@ const Search = () => {
           variant="outlined"
           fullWidth
           size="small"
+          value={searchTerm}
           onChange={handleChange}
           onKeyDown={keyPress}
         />
