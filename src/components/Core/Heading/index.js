@@ -12,7 +12,7 @@ const Heading = () => {
     <div className={headingWrapper}>
       <div className={headingBg}></div>
       <Switch>
-        <Route path="/" exact component={Search} />
+        <Route path="/search" exact component={Search} />
         <Route path="/film/:id" component={CardDetails} />
       </Switch>
     </div>

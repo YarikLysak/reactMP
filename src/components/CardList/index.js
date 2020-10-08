@@ -9,6 +9,7 @@ import {
   useGenresState,
   useSortByState,
 } from "../../store/selectors/moviesStateSelector";
+import { fetchAllMovies } from "../../store/actions/moviesActionCreators";
 
 import CardListHead from "./CardListHead";
 import CardItem from "./CardItem";
@@ -31,6 +32,7 @@ const CardList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(fetchAllMovies());
     dispatch(fetchGenres());
     dispatch(fetchSortBy());
   }, []);

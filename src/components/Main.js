@@ -1,7 +1,12 @@
 import React from "react";
 import { ThemeProvider } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 
 import { Header, Home, PageNotFound, Footer } from "./Core";
 import { theme, useStyles } from "./Main.styles";
@@ -21,7 +26,11 @@ const Main = () => {
           <div className={contentWrapper}>
             <Header movieView={movieView} selectSearch={onSelectSearch} />
             <Switch>
-              <Route path={["/", "/film/:id"]} exact component={Home} />
+              <Route path="/" exact render={() => <Redirect to="/search" />} />
+              <Route
+                path={["/search", "/search?=:searchTerm", "/film/:id"]}
+                component={Home}
+              />
               <Route path={["", "/404"]} component={PageNotFound} />
             </Switch>
           </div>

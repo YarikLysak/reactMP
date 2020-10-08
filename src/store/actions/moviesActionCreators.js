@@ -1,6 +1,11 @@
 import axios from "axios";
 import { actionTypes, BASE_URL } from "../../assets/constants";
 
+export const fetchAllMovies = () => async (dispatch) => {
+  const res = await axios.get(`${BASE_URL}/movieList`);
+  dispatch({ type: actionTypes.FETCH_MOVIES, payload: res.data });
+};
+
 export const fetchSearchMovies = (searchTerm) => async (dispatch) => {
   const res = await axios.get(`${BASE_URL}/movieList?q=${searchTerm}`);
   dispatch({ type: actionTypes.FETCH_MOVIES, payload: res.data });
