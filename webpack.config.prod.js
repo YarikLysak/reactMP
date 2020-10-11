@@ -24,16 +24,25 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|jpg|gif)$/,
-        use: ["file-loader"],
-      },
-      {
-        test: /\.svg$/,
+        test: /\.(png|jpg|gif|svg)$/,
         use: [
           {
-            loader: "svg-url-loader",
+            loader: "file-loader",
             options: {
-              limit: 10000,
+              name: "[name].[ext]",
+              outputPath: "./assets/images/",
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              outputPath: "./assets/fonts/",
             },
           },
         ],

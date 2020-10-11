@@ -6,10 +6,8 @@ import { ToggleButtonGroup, ToggleButton } from "@material-ui/lab";
 
 import CardListSort from "./CardListSort";
 import { cardListStyles } from "./CardList.styles";
-import {
-  filterMovies,
-  seFilterBy,
-} from "../../../store/actions/actionCreators";
+import { seFilterBy } from "../../../store/actions/actionCreators";
+import { filterMovies } from "../../../store/actions/moviesActionCreators";
 
 const CardListHead = ({ count, genres }) => {
   const {
@@ -53,9 +51,11 @@ const CardListHead = ({ count, genres }) => {
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <Typography variant="h6" className={filterInfo}>
-          <b>{count}</b> movies found
-        </Typography>
+        {count ? (
+          <Typography variant="h6" className={filterInfo}>
+            <b>{count}</b> movies found
+          </Typography>
+        ) : null}
       </Grid>
     </Grid>
   );

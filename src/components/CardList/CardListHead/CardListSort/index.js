@@ -5,12 +5,13 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import { cardListSortStyles } from "./CardListSort.styles";
 import { selectSortedBy } from "../../../../store/actions/actionCreators";
 import { StyledMenu, StyledMenuItem } from "../../CardItem/MoreBtn/StyledMenu";
+import { useSortByState } from "../../../../store/selectors/moviesStateSelector";
 
 const CardListSort = () => {
   const { sortByWrapper, sortTrigger, sortTriggerIcon } = cardListSortStyles();
-  const { list, selected } = useSelector((state) => state.sortBy);
-  const dispatch = useDispatch();
+  const { list, selected } = useSelector(useSortByState);
   const [anchorEl, setAnchorEl] = useState(null);
+  const dispatch = useDispatch();
 
   const handleOpen = useCallback((e) => setAnchorEl(e.currentTarget));
   const handleClose = useCallback(() => setAnchorEl(null));

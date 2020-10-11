@@ -1,4 +1,5 @@
 export { default as NoPicture } from "./no-picture.svg";
+export { default as NoPage } from "./404.svg";
 export { default as MoviesBg } from "./movies_bg.jpg";
 export { default as BohemianRhapsody } from "./bohemian-rhapsody.png";
 export { default as Inception } from "./inception.jpg";

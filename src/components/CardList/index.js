@@ -3,19 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 
+import { fetchGenres, fetchSortBy } from "../../store/actions/actionCreators";
 import {
-  fetchMovies,
-  fetchGenres,
-  fetchSortBy,
-} from "../../store/actions/actionCreators";
+  useFilteredMoviesState,
+  useGenresState,
+  useSortByState,
+} from "../../store/selectors/moviesStateSelector";
+import { fetchAllMovies } from "../../store/actions/moviesActionCreators";
 
 import CardListHead from "./CardListHead";
 import CardItem from "./CardItem";
+import EmptyPage from "../Core/EmptyPage";
 
 const useStyles = makeStyles((theme) => ({
   cardsListWrapper: {
     width: "100%",
-    maxWidth: "1400px",
     padding: "0 3em 3em",
     margin: "0.5em 0 0",
     backgroundColor: theme.darkGray,
@@ -24,12 +26,13 @@ const useStyles = makeStyles((theme) => ({
 
 const CardList = () => {
   const { cardsListWrapper } = useStyles();
-  const { movies, genres, sortBy } = useSelector((state) => state);
-  const { filteredMovieList } = movies;
+  const genres = useSelector(useGenresState);
+  const sortBy = useSelector(useSortByState);
+  const filteredMovieList = useSelector(useFilteredMoviesState);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchMovies());
+    dispatch(fetchAllMovies());
     dispatch(fetchGenres());
     dispatch(fetchSortBy());
   }, []);
@@ -55,11 +58,15 @@ const CardList = () => {
     <div className={cardsListWrapper}>
       <CardListHead count={filteredMovieList.length} genres={genres} />
       <Grid container spacing={6}>
-        {getMovieList().map((movie) => (
-          <Grid item sm={4} lg={3} key={movie.id}>
-            <CardItem movie={movie} />
-          </Grid>
-        ))}
+        {filteredMovieList.length ? (
+          getMovieList().map((movie) => (
+            <Grid item sm={4} lg={3} key={movie.id}>
+              <CardItem movie={movie} />
+            </Grid>
+          ))
+        ) : (
+          <EmptyPage />
+        )}
       </Grid>
     </div>
   );

@@ -1,6 +1,6 @@
-import actionTypes from "../actions/actionTypes";
 import { combineReducers } from "redux";
 import moviesReducer from "./movies.reducer";
+import { actionTypes } from "../../assets/constants";
 
 const initGenres = { list: [], selected: null };
 const sortByState = { list: [], selected: null };

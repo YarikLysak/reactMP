@@ -1,8 +1,10 @@
-const actionTypes = {
+export const BASE_URL = "/api";
+
+export const actionTypes = {
   FETCH_MOVIES: "FETCH_MOVIES",
   FETCH_GENRES: "FETCH_GENRES",
   FETCH_SORT_BY_LIST: "FETCH_SORT_BY_LIST",
-  SELECT_MOVIE: "SELECT_MOVIE",
+  FETCH_MOVIE_BY_ID: "FETCH_MOVIE_BY_ID",
   SELECT_SEARCH: "SELECT_SEARCH",
   SELECT_SORTED_BY: "SELECT_SORTED_BY",
   SELECT_EDIT_MOVIE: "SELECT_EDIT_MOVIE",
@@ -13,5 +15,3 @@ const actionTypes = {
   FILTER_MOVIES: "FILTER_MOVIES",
   SET_FILTER_BY: "SET_FILTER_BY",
 };
-
-export default actionTypes;

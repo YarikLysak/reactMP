@@ -1,51 +1,41 @@
-import React, { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
 
 import { MoreBtn } from "./MoreBtn";
 import { cardItemStyles } from "./CardItem.style";
-import { selectMovie } from "../../../store/actions/actionCreators";
+import { useGenresListState } from "../../../store/selectors/moviesStateSelector";
 
 const CardItem = ({ movie }) => {
-  const { title, genres, year, photo } = movie;
+  const { id, title, genres, year, photo } = movie;
 
-  const {
-    card,
-    cardInfo,
-    cardImage,
-    cardTitle,
-    cardSubTitle,
-    yearBlock,
-    moreBgHover,
-  } = cardItemStyles({ link: photo.link });
-  const dispatch = useDispatch();
-  const genreList = useSelector(({ genres }) => genres.list);
-
-  const handleClick = useCallback(() => dispatch(selectMovie(movie), [movie]));
+  const classes = cardItemStyles({ link: photo.link });
+  const genreList = useSelector(useGenresListState);
 
   return (
-    <div className={card}>
-      <MoreBtn moreBgHoverClass={moreBgHover} movie={movie} />
-      <div className={cardInfo} onClick={handleClick}>
-        <div className={cardImage}></div>
+    <div className={classes.card}>
+      <MoreBtn moreBgHoverClass={classes.moreBgHover} movie={movie} />
+      <Link to={`/film/${id}`} className={classes.cardInfo}>
+        <div className={classes.cardImage}></div>
         <div>
           <Grid container>
             <Grid item xs={9}>
-              <h3 className={cardTitle}>{title}</h3>
+              <h3 className={classes.cardTitle}>{title}</h3>
             </Grid>
-            <Grid item xs={3} className={yearBlock}>
+            <Grid item xs={3} className={classes.yearBlock}>
               <span>{year.split("-")[0]}</span>
             </Grid>
           </Grid>
-          <p className={cardSubTitle}>
+          <p className={classes.cardSubTitle}>
             {genreList
-              .filter(({ code }) => genres.includes(code))
+              .filter(({ code }) => code !== "0" && genres.includes(code))
               .map(({ title }) => title)
               .join(", ")}
           </p>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
