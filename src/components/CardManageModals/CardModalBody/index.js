@@ -22,6 +22,7 @@ import {
   updateMovie,
   addMovie,
 } from "../../../store/actions/moviesActionCreators";
+import { fetchGenres } from "../../../store/actions/actionCreators";
 import { useGenresListState } from "../../../store/selectors/moviesStateSelector";
 
 const CardModalBody = ({ setIsOpen, editedMovie }) => {
@@ -38,6 +39,9 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
   });
 
   useEffect(() => {
+    if(!genres.length) {
+      dispatch(fetchGenres())
+    }
     if (editedMovie) {
       setFormFieldsData({
         title: editedMovie.title,
@@ -82,7 +86,6 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
         title: "No picture found",
       };
       newMovieData.rate = 0;
-      console.log("newMovieData", newMovieData);
       dispatch(addMovie(newMovieData));
     }
 

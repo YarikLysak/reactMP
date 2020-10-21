@@ -19,7 +19,6 @@ const CardDetails = () => {
   const genreList = useSelector(useGenresListState);
 
   useEffect(() => {
-    console.log("useEffect", id, movie, genreList);
     if (!movie || !genreList.length || id !== movie.id) {
       dispatch(fetchMovieById(id, history));
       dispatch(fetchGenres());

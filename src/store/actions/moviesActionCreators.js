@@ -54,3 +54,7 @@ export const filterMovies = (filterBy) => ({
   type: actionTypes.FILTER_MOVIES,
   payload: filterBy,
 });
+
+export const selectSearch = () => ({
+  type: actionTypes.SELECT_SEARCH,
+});
