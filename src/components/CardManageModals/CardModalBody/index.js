@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Typography,
@@ -14,7 +14,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import DateRangeOutlinedIcon from "@material-ui/icons/DateRangeOutlined";
 import { useFormik } from "formik";
 
-import Logo from "../../Core/Logo";
 import { CardModalFormInput } from "./CardModalFormInput";
 import { cardManageBodyStyles } from "./CardModalBody.styles";
 import { theme } from "../../Main.styles";
@@ -30,7 +29,7 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
   const dispatch = useDispatch();
 
   const genres = useSelector(useGenresListState);
-  const [form, setFormFieldsData] = useState({
+  const [form, setFormFieldsData] = React.useState({
     title: "",
     year: "",
     genres: [],
@@ -38,7 +37,7 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
     runTime: "",
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if(!genres.length) {
       dispatch(fetchGenres())
     }
@@ -129,7 +128,6 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
       id: "title",
       title: "Title",
       placeholder: "Title here",
-      value: form.title,
       inputProps: null,
     },
     {
@@ -142,20 +140,17 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
           <DateRangeOutlinedIcon className={classes.inputDateIcon} />
         ),
       },
-      value: form.year,
     },
     {
       id: "description",
       title: "Overview",
       placeholder: "Overview here",
-      value: form.description,
       inputProps: null,
     },
     {
       id: "runTime",
       title: "Runtime",
       placeholder: "Runtime here",
-      value: form.runTime,
       inputProps: null,
     },
   ];
@@ -180,19 +175,20 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
 
   return (
     <>
-      <Logo />
       <div className={classes.cardModalBody}>
         <CloseIcon
           className={classes.cardModalBodyIcon}
           fontSize="large"
+          data-test="modal-close"
           onClick={() => setIsOpen(false)}
         />
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" gutterBottom data-test="modal-header">
           {editedMovie ? "Edit" : "Add"} movie
         </Typography>
         <form
           className={classes.cardModalBodyForm}
           onSubmit={manageForm.handleSubmit}
+          data-test="modal-form"
         >
           {formInputs.map((input, i) => {
             return (
@@ -267,10 +263,11 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
             </FormControl>
           </div>
 
-          <div className={classes.cardModalBtnBlock}>
+          <div className={classes.cardModalBtnBlock} data-test="form-btns">
             <Button
               variant="outlined"
               color="secondary"
+              type="reset"
               fullWidth
               onClick={onReset}
             >
@@ -279,8 +276,8 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
             <Button
               variant="contained"
               color="secondary"
-              fullWidth
               type="submit"
+              fullWidth
             >
               Save
             </Button>
