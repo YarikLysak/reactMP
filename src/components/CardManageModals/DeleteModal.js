@@ -3,8 +3,7 @@ import { useDispatch } from "react-redux";
 import { Modal, Typography, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/styles";
-import { deleteMovie } from "../../store/actions/moviesActionCreators";
-import { selectSearch } from "../../store/actions/actionCreators";
+import { deleteMovie, selectSearch } from "../../store/actions/moviesActionCreators";
 
 const styles = makeStyles((theme) => ({
   deleteModal: {

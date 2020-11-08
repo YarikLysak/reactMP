@@ -10,7 +10,7 @@ import {
 
 import { Header, Home, PageNotFound, Footer } from "./Core";
 import { theme, useStyles } from "./Main.styles";
-import { selectSearch } from "../store/actions/actionCreators";
+import { selectSearch } from "../store/actions/moviesActionCreators";
 import { useMovieView } from "../store/selectors/moviesStateSelector";
 
 const Main = () => {

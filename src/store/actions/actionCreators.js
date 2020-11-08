@@ -11,10 +11,6 @@ export const fetchSortBy = () => async (dispatch) => {
   dispatch({ type: actionTypes.FETCH_SORT_BY_LIST, payload: res.data });
 };
 
-export const selectSearch = () => ({
-  type: actionTypes.SELECT_SEARCH,
-});
-
 export const selectSortedBy = (sortBy) => ({
   type: actionTypes.SELECT_SORTED_BY,
   payload: sortBy,

@@ -12,6 +12,7 @@ export const cardDetailsStyles = ({ link, rateColor }) =>
       backgroundRepeat: "no-repeat",
       backgroundSize: "contain",
       backgroundImage: `url(${link})`,
+      backgroundPositionX: 'right',
       marginBottom: theme.spacing(2),
     },
     cardTitleWrapper: {

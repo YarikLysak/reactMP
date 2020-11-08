@@ -17,6 +17,11 @@ export const cardItemStyles = ({ link }) =>
       flexDirection: "column",
       justifyContent: "space-between",
       cursor: "pointer",
+      textDecoration:'none',
+
+      '&:hover *':{
+        color: theme.white
+      }
     },
     cardImage: {
       height: "100%",
@@ -24,7 +29,8 @@ export const cardItemStyles = ({ link }) =>
       backgroundRepeat: "no-repeat",
       backgroundSize: "contain",
       backgroundImage: `url(${link})`,
-      backgroundPosition: "center",
+      backgroundPositionX: 'right',
+      backgroundPositionY: 'top',
       marginBottom: theme.spacing(2),
     },
     cardTitle: {
