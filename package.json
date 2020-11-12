@@ -4,9 +4,10 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"yarn run start:be\" \"yarn run start:fe\"",
-    "build-dev": "rimraf ./dist && webpack --env dev",
-    "build-prod": "rimraf ./dist && webpack --env prod",
+    "start": "concurrently \"yarn run start:be\" \"dev:build:server\" \"yarn run start:fe\"",
+    "build-dev": "rimraf ./dist && webpack --config webpack --env prod",
+    "build-prod": "rimraf ./dist && webpack --config webpack --env dev",
+    "dev:build:server": "webpack --config webpack.config.server.js",
     "start:be": "json-server --watch db.json",
     "start:fe": "yarn run build-dev && webpack-dev-server --open --env dev",
     "test": "jest --collect-coverage --watch --runInBand"
@@ -25,6 +26,7 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/styles": "^4.10.0",
+    "express": "^4.17.1",
     "formik": "^2.1.5",
     "json-server": "^0.16.1",
     "react": "^16.13.1",
