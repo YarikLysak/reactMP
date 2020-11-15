@@ -35,10 +35,7 @@ const CardManageModal = (props) => {
         open={isOpen}
         onClose={() => setIsOpen(false)}
       >
-        {CardModalBody({
-          setIsOpen: setIsOpen,
-          editedMovie: props.editedMovie,
-        })}
+        <CardModalBody setIsOpen={setIsOpen} editedMovie={props.editedMovie} />
       </Modal>
     </>
   );

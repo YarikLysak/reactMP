@@ -24,7 +24,7 @@ import {
 import { fetchGenres } from "../../../store/actions/actionCreators";
 import { useGenresListState } from "../../../store/selectors/moviesStateSelector";
 
-const CardModalBody = ({ setIsOpen, editedMovie }) => {
+const CardModalBody = ({ setIsOpen, editedMovie, forwardedRef }) => {
   const classes = cardManageBodyStyles();
   const dispatch = useDispatch();
 
@@ -38,9 +38,10 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
   });
 
   React.useEffect(() => {
-    if(!genres.length) {
-      dispatch(fetchGenres())
+    if (!genres.length) {
+      dispatch(fetchGenres());
     }
+
     if (editedMovie) {
       setFormFieldsData({
         title: editedMovie.title,
@@ -50,7 +51,7 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
         runTime: editedMovie.runTime,
       });
     }
-  }, [editedMovie]);
+  }, [editedMovie, genres, dispatch]);
 
   const onReset = () => {
     setFormFieldsData({
@@ -156,6 +157,7 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
   ];
 
   const manageForm = useFormik({
+    enableReinitialize: true,
     initialValues: form,
     validate: ({ title, genres }) => {
       const errors = {};
@@ -174,117 +176,112 @@ const CardModalBody = ({ setIsOpen, editedMovie }) => {
   });
 
   return (
-    <>
-      <div className={classes.cardModalBody}>
-        <CloseIcon
-          className={classes.cardModalBodyIcon}
-          fontSize="large"
-          data-test="modal-close"
-          onClick={() => setIsOpen(false)}
-        />
-        <Typography variant="h4" gutterBottom data-test="modal-header">
-          {editedMovie ? "Edit" : "Add"} movie
-        </Typography>
-        <form
-          className={classes.cardModalBodyForm}
-          onSubmit={manageForm.handleSubmit}
-          data-test="modal-form"
-        >
-          {formInputs.map((input, i) => {
-            return (
-              <CardModalFormInput
-                key={"formInput" + i}
-                changeKey={"formInput" + i}
-                id={input.id}
-                title={input.title}
-                type={input.type}
-                placeholder={input.placeholder}
-                value={manageForm.values[input.id]}
-                InputProps={input.inputProps}
-                error={!!manageForm.errors[input.id]}
-                helperText={manageForm.errors[input.id]}
-                onChange={manageForm.handleChange}
-                onBlur={manageForm.handleBlur}
-              />
-            );
-          })}
+    <div className={classes.cardModalBody} ref={forwardedRef} tabIndex="-1">
+      <CloseIcon
+        className={classes.cardModalBodyIcon}
+        fontSize="large"
+        data-test="modal-close"
+        onClick={() => setIsOpen(false)}
+      />
+      <Typography variant="h4" gutterBottom data-test="modal-header">
+        {editedMovie ? "Edit" : "Add"} movie
+      </Typography>
+      <form
+        className={classes.cardModalBodyForm}
+        onSubmit={manageForm.handleSubmit}
+        data-test="modal-form"
+      >
+        {formInputs.map((input, i) => {
+          return (
+            <CardModalFormInput
+              key={"formInput" + i}
+              changeKey={"formInput" + i}
+              id={input.id}
+              title={input.title}
+              type={input.type}
+              placeholder={input.placeholder}
+              value={manageForm.values[input.id]}
+              InputProps={input.inputProps}
+              error={!!manageForm.errors[input.id]}
+              helperText={manageForm.errors[input.id]}
+              onChange={manageForm.handleChange}
+              onBlur={manageForm.handleBlur}
+            />
+          );
+        })}
 
-          {/* Genres */}
-          <div className={classes.formFieldWrapper}>
-            <FormControl error={!!manageForm.errors.genres}>
-              <label htmlFor="manage-genres">Genres</label>
-              <Select
-                className={classes.cardMultiselect}
-                value={manageForm.values.genres}
-                onChange={manageForm.handleChange}
-                onBlur={manageForm.handleBlur}
-                multiple
-                displayEmpty
-                inputProps={Props.selectInput}
-                SelectDisplayProps={Props.selectDisplay}
-                MenuProps={Props.menu}
-                renderValue={(selected) => {
-                  if (selected.length === 0) {
-                    return (
-                      <span style={{ color: "rgb(147 147 147)" }}>
-                        Select Genre
-                      </span>
-                    );
-                  } else if (selected.includes("0")) {
-                    return genres.map((item) => item.title).join(", ");
-                  }
-                  return selected
-                    .map((val) => genres.find(({ code }) => val === code).title)
-                    .join(", ");
-                }}
-              >
-                <MenuItem disabled value="">
-                  <em>Select Genres</em>
+        {/* Genres */}
+        <div className={classes.formFieldWrapper}>
+          <FormControl error={!!manageForm.errors.genres}>
+            <label htmlFor="manage-genres">Genres</label>
+            <Select
+              className={classes.cardMultiselect}
+              value={manageForm.values.genres}
+              onChange={manageForm.handleChange}
+              onBlur={manageForm.handleBlur}
+              multiple
+              displayEmpty
+              inputProps={Props.selectInput}
+              SelectDisplayProps={Props.selectDisplay}
+              MenuProps={Props.menu}
+              renderValue={(selected) => {
+                if (selected.length === 0) {
+                  return (
+                    <span style={{ color: "rgb(147 147 147)" }}>
+                      Select Genre
+                    </span>
+                  );
+                } else if (selected.includes("0")) {
+                  return genres.map((item) => item.title).join(", ");
+                }
+                return selected
+                  .map((val) => genres.find(({ code }) => val === code).title)
+                  .join(", ");
+              }}
+            >
+              <MenuItem disabled value="">
+                <em>Select Genres</em>
+              </MenuItem>
+              {genres.map((genre) => (
+                <MenuItem key={genre.code} value={genre.code}>
+                  <Checkbox
+                    className={classes.cardMultiselectCheckbox}
+                    checked={(() => {
+                      let list = manageForm.values.genres;
+                      return (
+                        list.includes("0") || list.indexOf(genre.code) > -1
+                      );
+                    })()}
+                  />
+                  <ListItemText
+                    className={classes.cardMultiselectItem}
+                    primary={genre.title}
+                  />
                 </MenuItem>
-                {genres.map((genre) => (
-                  <MenuItem key={genre.code} value={genre.code}>
-                    <Checkbox
-                      className={classes.cardMultiselectCheckbox}
-                      checked={(() => {
-                        let list = manageForm.values.genres;
-                        return (
-                          list.includes("0") || list.indexOf(genre.code) > -1
-                        );
-                      })()}
-                    />
-                    <ListItemText
-                      className={classes.cardMultiselectItem}
-                      primary={genre.title}
-                    />
-                  </MenuItem>
-                ))}
-              </Select>
-              <FormHelperText>{manageForm.errors.genres}</FormHelperText>
-            </FormControl>
-          </div>
+              ))}
+            </Select>
+            <FormHelperText>{manageForm.errors.genres}</FormHelperText>
+          </FormControl>
+        </div>
 
-          <div className={classes.cardModalBtnBlock} data-test="form-btns">
-            <Button
-              variant="outlined"
-              color="secondary"
-              type="reset"
-              fullWidth
-              onClick={onReset}
-            >
-              Reset
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              type="submit"
-              fullWidth
-            >
-              Save
-            </Button>
-          </div>
-        </form>
-      </div>
-    </>
+        <div className={classes.cardModalBtnBlock} data-test="form-btns">
+          <Button
+            variant="outlined"
+            color="secondary"
+            type="reset"
+            fullWidth
+            onClick={onReset}
+          >
+            Reset
+          </Button>
+          <Button variant="contained" color="secondary" type="submit" fullWidth>
+            Save
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
-export default CardModalBody;
+export default React.forwardRef((props, ref) => (
+  <CardModalBody {...props} forwardedRef={ref} />
+));

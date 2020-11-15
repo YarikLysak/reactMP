@@ -57,7 +57,7 @@
       "rate": 8.9,
       "year": "1994-01-01",
       "photo": {
-        "link": "./src/assets/images/pulp-fiction.jpg",
+        "link": "/assets/images/pulp-fiction.jpg",
         "title": "Pulp fiction"
       }
     },
@@ -75,7 +75,7 @@
       "rate": 8,
       "year": "2018-01-01",
       "photo": {
-        "link": "./src/assets/images/bohemian-rhapsody.png",
+        "link": "/assets/images/bohemian-rhapsody.png",
         "title": "Bohemian rhapsody"
       }
     },
@@ -91,7 +91,7 @@
       "rate": 8,
       "year": "2004-01-01",
       "photo": {
-        "link": "./src/assets/images/kill-bill-2.jpg",
+        "link": "/assets/images/kill-bill-2.jpg",
         "title": "Kill Bill: Vol 2"
       }
     },
@@ -108,7 +108,7 @@
       "rate": 8.4,
       "year": "2018-01-01",
       "photo": {
-        "link": "./src/assets/images/infinity-war.jpg",
+        "link": "/assets/images/infinity-war.jpg",
         "title": "Avengers: Infinity War"
       }
     },
@@ -125,7 +125,7 @@
       "rate": 8.8,
       "year": "2010-01-01",
       "photo": {
-        "link": "./src/assets/images/inception.jpg",
+        "link": "/assets/images/inception.jpg",
         "title": "Inception"
       }
     },
@@ -141,7 +141,7 @@
       "rate": 8.3,
       "year": "1992-01-01",
       "photo": {
-        "link": "./src/assets/images/reservoir_dogs.jpg",
+        "link": "/assets/images/reservoir_dogs.jpg",
         "title": "Reservoir dogs"
       }
     }

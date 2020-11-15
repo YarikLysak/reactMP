@@ -1,18 +1,20 @@
 const path = require("path");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const nodeExternals = require("webpack-node-externals");
+const NodemonPlugin = require("nodemon-webpack-plugin");
 
 module.exports = {
-  mode: "production",
-  entry: "./src/index.js",
+  mode: "development",
+  // mode: env === "dev" ? "development" : "production",
+  target: "node",
+  externals: [nodeExternals()],
+  entry: ["@babel/polyfill", "./server/index.js"],
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "app.bundle.js",
+    filename: "server.js",
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
         loader: "babel-loader",
       },
       {
@@ -21,7 +23,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: [{ loader: "css-loader" }],
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -30,7 +32,7 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "./assets/images/",
+              outputPath: "/assets/images/",
             },
           },
         ],
@@ -42,7 +44,7 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "./assets/fonts/",
+              outputPath: "/assets/fonts/",
             },
           },
         ],
@@ -50,9 +52,9 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html",
+    new NodemonPlugin({
+      script: "./dist/server.js",
+      watch: path.resolve("./dist"),
     }),
   ],
 };

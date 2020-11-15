@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
@@ -8,38 +9,42 @@ import Logo from "../Logo";
 import { headerStyles } from "./Header.styles";
 import { CardManageModal } from "../../CardManageModals";
 
-const Header = ({ movieView, selectSearch, hideBtn = false }) => {
+import { selectSearch } from "../../../store/actions/moviesActionCreators";
+import { useMovieView } from "../../../store/selectors/moviesStateSelector";
+
+const Header = () => {
   const { header, addButton, searchButton } = headerStyles();
 
-  const handleClick = useCallback(() => selectSearch());
+  const dispatch = useDispatch();
+  const onSelectSearch = () => dispatch(selectSearch());
+  const movieView = useSelector(useMovieView);
 
-  const headerButton = () =>
-    !movieView ? (
-      <CardManageModal>
-        <Button
-          variant="outlined"
-          color="secondary"
-          startIcon={<AddIcon />}
-          className={addButton}
-        >
-          Add movie
-        </Button>
-      </CardManageModal>
-    ) : (
-      <Link to="/">
-        <SearchIcon
-          fontSize="large"
-          color="secondary"
-          className={searchButton}
-          onClick={handleClick}
-        />
-      </Link>
-    );
+  const handleClick = useCallback(() => onSelectSearch());
 
   return (
     <div className={header}>
       <Logo />
-      {hideBtn ? "" : headerButton()}
+      {!movieView ? (
+        <CardManageModal>
+          <Button
+            variant="outlined"
+            color="secondary"
+            startIcon={<AddIcon />}
+            className={addButton}
+          >
+            Add movie
+          </Button>
+        </CardManageModal>
+      ) : (
+        <Link to="/">
+          <SearchIcon
+            fontSize="large"
+            color="secondary"
+            className={searchButton}
+            onClick={handleClick}
+          />
+        </Link>
+      )}
     </div>
   );
 };

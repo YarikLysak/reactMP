@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { TextField, Button } from "@material-ui/core";
 
 import { useStyles } from "./styles";
 import { fetchSearchMovies } from "../../../store/actions/moviesActionCreators";
+import useInitPromisesHook from "../../../store/useInitPromises.hook";
 
 const Search = () => {
   const classes = useStyles();
@@ -12,10 +13,12 @@ const Search = () => {
   const { search } = useLocation();
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useInitPromisesHook(() => {
     const urlSearchString = search.split("?=").join("");
-    dispatch(fetchSearchMovies(urlSearchString ? urlSearchString : null));
-  });
+    return [
+      dispatch(fetchSearchMovies(urlSearchString ? urlSearchString : null)),
+    ];
+  }, [dispatch, search]);
 
   const onSearch = () => {
     dispatch(fetchSearchMovies(searchTerm ? searchTerm : null));
