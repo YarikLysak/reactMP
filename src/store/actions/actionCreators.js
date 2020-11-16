@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../axios.client";
 import { actionTypes, BASE_URL } from "../../assets/constants";
 
 export const fetchGenres = () => async (dispatch) => {

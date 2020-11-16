@@ -3,20 +3,12 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  entry: ["babel-polyfill", "./src/index.js"],
+  target: "web",
   devtool: "source-map",
+  entry: ["@babel/polyfill", "./src/index.js"],
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "../dist"),
     filename: "app.bundle.js",
-  },
-  devServer: {
-    historyApiFallback: true,
-    proxy: {
-      "/api": {
-        target: "http://localhost:3000",
-        pathRewrite: { "^/api": "" },
-      },
-    },
   },
   module: {
     rules: [
@@ -40,7 +32,7 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "./assets/images/",
+              outputPath: "/assets/images/",
             },
           },
         ],
@@ -52,18 +44,11 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "./assets/fonts/",
+              outputPath: "/assets/fonts/",
             },
           },
         ],
       },
     ],
   },
-  plugins: [
-    new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html",
-      base: "/",
-    }),
-  ],
 };

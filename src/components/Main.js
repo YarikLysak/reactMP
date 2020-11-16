@@ -1,43 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ThemeProvider } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { Provider } from "react-redux";
 
-import { Header, Home, PageNotFound, Footer } from "./Core";
+import Routes from "./Routes";
+
+import { Header, Footer } from "./Core";
 import { theme, useStyles } from "./Main.styles";
-import { selectSearch } from "../store/actions/moviesActionCreators";
-import { useMovieView } from "../store/selectors/moviesStateSelector";
+import AppContext from "../store/AppContext";
 
-const Main = () => {
+const Main = ({ Router, location, initPromises, context, store }) => {
   const { wrapper, contentWrapper } = useStyles();
-  const dispatch = useDispatch();
-  const onSelectSearch = () => dispatch(selectSearch());
-  const movieView = useSelector(useMovieView);
+
+  useEffect(() => {
+    const styles = [
+      "#jss-server-side",
+      "#global-css-server-side",
+      "#global-fonts-server-side",
+    ];
+
+    styles.forEach((selector) => {
+      const item = document.querySelector(selector);
+      if (item) {
+        item.parentElement.removeChild(item);
+      }
+    });
+  }, []);
 
   return (
-    <div className={wrapper}>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <div className={contentWrapper}>
-            <Header movieView={movieView} selectSearch={onSelectSearch} />
-            <Switch>
-              <Route path="/" exact render={() => <Redirect to="/search" />} />
-              <Route
-                path={["/search", "/search?=:searchTerm", "/film/:id"]}
-                component={Home}
-              />
-              <Route path={["", "/404"]} component={PageNotFound} />
-            </Switch>
-          </div>
-        </Router>
-        <Footer />
-      </ThemeProvider>
-    </div>
+    <AppContext.Provider value={{ initPromises }}>
+      <Provider store={store}>
+        <div className={wrapper}>
+          <ThemeProvider theme={theme}>
+            <Router location={location} context={context}>
+              <div className={contentWrapper}>
+                <Header />
+                <Routes />
+              </div>
+            </Router>
+            <Footer />
+          </ThemeProvider>
+        </div>
+      </Provider>
+    </AppContext.Provider>
   );
 };
 

@@ -1,20 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import { createStore, applyMiddleware } from "redux";
+import { BrowserRouter } from "react-router-dom";
 
-import reducers from "./store/reducers";
 import Main from "./components/Main";
 
+import configureStore from "./helper/configureStore";
 import "./assets/styles/main.css";
 import "./assets/styles/fonts.css";
 
-const store = createStore(reducers, applyMiddleware(thunk));
+const store = configureStore(window.PRELOADED_STATE);
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Main />
-  </Provider>,
+ReactDOM.hydrate(
+  <Main Router={BrowserRouter} store={store} />,
   document.querySelector("#container")
 );

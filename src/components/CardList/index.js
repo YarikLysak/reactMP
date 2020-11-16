@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
@@ -10,6 +10,7 @@ import {
   useSortByState,
 } from "../../store/selectors/moviesStateSelector";
 import { fetchAllMovies } from "../../store/actions/moviesActionCreators";
+import useInitPromisesHook from "../../store/useInitPromises.hook";
 
 import CardListHead from "./CardListHead";
 import CardItem from "./CardItem";
@@ -31,11 +32,14 @@ const CardList = () => {
   const filteredMovieList = useSelector(useFilteredMoviesState);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchAllMovies());
-    dispatch(fetchGenres());
-    dispatch(fetchSortBy());
-  }, []);
+  useInitPromisesHook(
+    () => [
+      dispatch(fetchAllMovies()),
+      dispatch(fetchGenres()),
+      dispatch(fetchSortBy()),
+    ],
+    [dispatch]
+  );
 
   const sortingMovie = (list, field) =>
     list.sort((a, b) => {

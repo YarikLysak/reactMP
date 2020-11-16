@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router";
 import { Grid } from "@material-ui/core";
@@ -10,6 +10,7 @@ import {
   useGenresListState,
   useSelectedMovie,
 } from "../../../store/selectors/moviesStateSelector";
+import useInitPromisesHook from "../../../store/useInitPromises.hook";
 
 const CardDetails = () => {
   const { id } = useParams();
@@ -18,12 +19,11 @@ const CardDetails = () => {
   const movie = useSelector(useSelectedMovie);
   const genreList = useSelector(useGenresListState);
 
-  useEffect(() => {
+  useInitPromisesHook(() => {
     if (!movie || !genreList.length || id !== movie.id) {
-      dispatch(fetchMovieById(id, history));
-      dispatch(fetchGenres());
+      return [dispatch(fetchMovieById(id, history)), dispatch(fetchGenres())];
     }
-  });
+  }, [movie, genreList, id, history, dispatch]);
 
   const setRateColor = (rate) => {
     if (rate > 8.5) {
